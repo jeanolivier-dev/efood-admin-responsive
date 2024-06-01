@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { Button, Input, FileInput } from "rizzui";
 import cn from "@/utils/class-names";
 import FormGroup from "@/components/form-group";
@@ -7,6 +8,9 @@ import QuillEditor from "@/components/ui/quill-editor";
 
 // main category form component for create and update category
 export default function CreateMenu() {
+  const [state, setState] = React.useState<any>("");
+  const [value, setValue] = useState(null);
+
   return (
     <div className="@container">
       <div className={cn("z-[999] 2xl:top-[72px]")} />
@@ -32,8 +36,16 @@ export default function CreateMenu() {
           <FormGroup
             title="Image miniature"
             description="Télécharger l'image miniature de votre menu ici"
+            className="pt-8"
           >
-            <FileInput />
+            <FileInput
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              clearable={!!state}
+              onClear={() => {
+                setState("");
+              }}
+            />
           </FormGroup>
         </div>
         <div
@@ -41,7 +53,7 @@ export default function CreateMenu() {
             "sticky bottom-0 z-40 flex items-center justify-end gap-3 bg-gray-0/10 backdrop-blur @lg:gap-4 @xl:grid @xl:auto-cols-max @xl:grid-flow-col"
           )}
         >
-          <Button type="submit" className="w-full @xl:w-auto">
+          <Button type="submit" className="w-full pt-4 @xl:w-auto">
             Créer le menu
           </Button>
         </div>

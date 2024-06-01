@@ -18,6 +18,10 @@ export default function SignUpForm() {
           placeholder="Entrez votre mot de passe"
           className="[&>label>span]:font-medium"
         />
+        <Password
+          placeholder="Confirmez votre mot de passe"
+          className="[&>label>span]:font-medium"
+        />
         <div className="col-span-2 flex items-start pb-1 text-gray-700">
           <Switch
             className="[&>label>span.transition]:shrink-0 [&>label>span]:font-medium"

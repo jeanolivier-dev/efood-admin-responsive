@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -55,6 +55,7 @@ export default function CreateDishe({ className }: IndexProps) {
     { label: "Desserts", value: "desserts" },
   ];
 
+  const [state, setState] = React.useState<any>("");
   const [value, setValue] = useState(null);
 
   return (
@@ -85,8 +86,9 @@ export default function CreateDishe({ className }: IndexProps) {
               {...register("sku")}
               error={errors.sku?.message}
             />
+
             <Select
-              label="Sélectionnez un menu"
+              label="Select"
               options={options}
               value={value}
               onChange={setValue}
@@ -103,7 +105,7 @@ export default function CreateDishe({ className }: IndexProps) {
           <FormGroup
             title="Prix"
             description="Ajoutez le prix du plat ici"
-            className={cn(className)}
+            className="pt-8"
           >
             <Input
               placeholder="0"
@@ -116,9 +118,16 @@ export default function CreateDishe({ className }: IndexProps) {
           <FormGroup
             title="Image miniature"
             description="Télécharger l'image miniature de votre plat ici"
-            className={cn(className)}
+            className="pt-8"
           >
-            <FileInput />
+            <FileInput
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              clearable={!!state}
+              onClear={() => {
+                setState("");
+              }}
+            />
           </FormGroup>
         </div>
         <div

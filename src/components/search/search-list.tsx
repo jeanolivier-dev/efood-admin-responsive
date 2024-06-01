@@ -89,7 +89,7 @@ export default function SearchList({ onClose }: { onClose?: () => void }) {
             <Empty
               className="scale-75"
               image={<SearchNotFoundIcon />}
-              text="No Result Found"
+              text="Aucun résultat trouvé"
               textClassName="text-xl"
             />
           ) : (
