@@ -19,7 +19,7 @@ export default function Header() {
         onClick={() => setIsOpen((prev) => !prev)}
         className={`bg-gray-900/50 ${
           isOpen ? "block" : "hidden"
-        } absolute top-0 left-0 h-dvh w-screen z-50 cursor-pointer `}
+        } fixed top-0 left-0 h-dvh w-screen z-50 cursor-pointer `}
       ></div>
       <MobileSidebar isOpen={isOpen} />
       <StickyHeader className="z-[40] 2xl:py-5 3xl:px-8  4xl:px-10">
@@ -66,7 +66,7 @@ function MobileSidebar({ isOpen }: { isOpen: boolean }) {
   const pathname = usePathname();
   return (
     <aside
-      className={`absolute z-[100] h-dvh top-0 left-0 w-[270px] border-e-2 backdrop-blur-xl bg-white border-gray-100  2xl:w-72 ${
+      className={`fixed z-[100] h-dvh top-0 left-0 w-[270px] border-e-2 backdrop-blur-xl bg-white border-gray-100  2xl:w-72 ${
         !isOpen ? "-translate-x-full" : "translate-x-0"
       } transition-all`}
     >

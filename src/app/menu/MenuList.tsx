@@ -29,6 +29,28 @@ import {
 } from "@/components/ui/table";
 
 export default function MenuList() {
+  const date = new Date()
+  const menu = [
+    {
+      id : 1,
+      name : "Entree",
+      description : "Lorem Ipsum is simply dummy text",
+      dishes_amount : 4,
+      created_at : date.toDateString()
+    },{
+      id : 2,
+      name : "test",
+      description : "Lorem Ipsum is simply dummy text",
+      dishes_amount : 4,
+      created_at : date.toDateString()
+    },{
+      id : 3,
+      name : "tes55",
+      description : "Lorem Ipsum is simply dummy text",
+      dishes_amount : 4,
+      created_at : date.toDateString()
+    },
+  ]
   return (
     <Card>
       <CardContent>
@@ -48,74 +70,42 @@ export default function MenuList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-full object-cover"
-                  height="64"
-                  src={productImage}
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Entrées</TableCell>
-              <TableCell className="font-medium">
-                Lorem Ipsum is simply dummy text
-              </TableCell>
-              <TableCell>
-                <TableCell className="font-medium">4</TableCell>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">12-07-2023</TableCell>
-              <TableCell>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button aria-haspopup="true" size="icon" variant="ghost">
-                      <MoreHorizontal className="h-4 w-4" />
-                      <span className="sr-only">Toggle menu</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Modifier</DropdownMenuItem>
-                    <DropdownMenuItem>Supprimer</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-full object-cover"
-                  height="64"
-                  src={productImage}
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Plats principaux</TableCell>
-              <TableCell className="font-medium">
-                Lorem Ipsum is simply dummy text
-              </TableCell>
-              <TableCell>
-                <TableCell className="font-medium">4</TableCell>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">18-10-2023</TableCell>
-              <TableCell>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button aria-haspopup="true" size="icon" variant="ghost">
-                      <MoreHorizontal className="h-4 w-4" />
-                      <span className="sr-only">Toggle menu</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Modifier</DropdownMenuItem>
-                    <DropdownMenuItem>Supprimer</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
+            {menu.map(({id,name,description,dishes_amount,created_at}) => (
+              <TableRow key={id}>
+                <TableCell className="hidden sm:table-cell">
+                  <Image
+                    alt="Product image"
+                    className="aspect-square rounded-full object-cover"
+                    height="64"
+                    src={productImage}
+                    width="64"
+                  />
+                </TableCell>
+                <TableCell className="font-medium">{name}</TableCell>
+                <TableCell className="font-medium">
+                  {description}
+                </TableCell>
+                <TableCell>
+                  <TableCell className="font-medium">{dishes_amount}</TableCell>
+                </TableCell>
+                <TableCell className="hidden md:table-cell">{created_at}</TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button aria-haspopup="true" size="icon" variant="ghost">
+                        <MoreHorizontal className="h-4 w-4" />
+                        <span className="sr-only">Toggle menu</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className={"bg-white"}>
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuItem>Modifier</DropdownMenuItem>
+                      <DropdownMenuItem>Supprimer</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </CardContent>
