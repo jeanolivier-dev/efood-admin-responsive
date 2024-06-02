@@ -30,7 +30,7 @@ export const menuItems = [
 
   {
     name: "Utilisateurs",
-    href: "#",
+    href: "/utilisateurs",
     icon: <FaRegUser />,
   },
 ];

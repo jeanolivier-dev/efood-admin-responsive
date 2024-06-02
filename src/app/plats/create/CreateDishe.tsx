@@ -88,7 +88,7 @@ export default function CreateDishe({ className }: IndexProps) {
             />
 
             <Select
-              label="Select"
+              label="Sélectionnez un menu"
               options={options}
               value={value}
               onChange={setValue}
