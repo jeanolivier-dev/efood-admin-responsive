@@ -4,12 +4,21 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input, Text, Select, FileInput, Button } from "rizzui";
+import { Input, Text, FileInput, Button } from "rizzui";
 import cn from "@/utils/class-names";
-import FormFooter from "@/components/form-footer";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
 import QuillEditor from "@/components/ui/quill-editor";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface IndexProps {
   slug?: string;
@@ -49,14 +58,31 @@ export default function CreateDishe({ className }: IndexProps) {
     reset();
   };
 
-  const options = [
-    { label: "Entrées", value: "entrées" },
-    { label: "Plats", value: "plats" },
-    { label: "Desserts", value: "desserts" },
-  ];
-
   const [state, setState] = React.useState<any>("");
   const [value, setValue] = useState(null);
+
+  const menu_select = [
+    {
+      id: 1,
+      menu: "Entrée",
+      value: "entrée",
+    },
+    {
+      id: 2,
+      menu: "Plats",
+      value: "plats",
+    },
+    {
+      id: 3,
+      menu: "Desserts",
+      value: "desserts",
+    },
+  ];
+
+  const status_select = [
+    { id: 1, status: "Activé", value: "Activé" },
+    { id: 2, status: "Désactivé", value: "Désactivé" },
+  ];
 
   return (
     <div className="@container">
@@ -78,21 +104,55 @@ export default function CreateDishe({ className }: IndexProps) {
               label="Nom"
               placeholder="Nom du plat"
               {...register("name")}
-              error={errors.name?.message}
             />
-            <Input
-              label="SKU"
-              placeholder="SKU du plat"
-              {...register("sku")}
-              error={errors.sku?.message}
-            />
+            <Input label="SKU" placeholder="SKU du plat" {...register("sku")} />
 
-            <Select
+            <div>
+              <label className="font-medium">Menu</label>
+              <Select>
+                <SelectTrigger className="w-200px">
+                  <SelectValue placeholder="Sélectionnez un menu" />
+                </SelectTrigger>
+                <SelectContent className="bg-white ">
+                  {menu_select.map(({ id, menu, value }) => (
+                    <SelectItem
+                      className="hover:bg-anzac-500 hover:text-white rounded-md"
+                      key={id}
+                      value={value}
+                    >
+                      {menu}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/**             <Select
               label="Sélectionnez un menu"
               options={options}
               value={value}
               onChange={setValue}
-            />
+            />*/}
+
+            <div>
+              <label className="font-medium">Status</label>
+              <Select>
+                <SelectTrigger className="w-200px">
+                  <SelectValue placeholder="Sélectionnez un status" />
+                </SelectTrigger>
+                <SelectContent className="bg-white ">
+                  {status_select.map(({ id, status, value }) => (
+                    <SelectItem
+                      className="hover:bg-anzac-500 hover:text-white rounded-md"
+                      key={id}
+                      value={value}
+                    >
+                      {status}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
             <QuillEditor
               // value={value}

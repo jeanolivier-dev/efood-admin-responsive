@@ -23,7 +23,7 @@ export default function CreateMenu() {
             }
           >
             <Input label="Nom" placeholder="Nom du menu" />
-            <Input label="Slug" placeholder="slug" />
+            <Input label="Slug" placeholder="Slug" />
 
             <div className="col-span-2">
               <QuillEditor
