@@ -1,4 +1,4 @@
-import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineDashboard, MdOutlineTableBar } from "react-icons/md";
 import { PiForkKnife } from "react-icons/pi";
 import { BiDish } from "react-icons/bi";
 import { TbInvoice } from "react-icons/tb";
@@ -26,6 +26,11 @@ export const menuItems = [
     name: "Menu",
     href: "/menu",
     icon: <BiDish />,
+  },
+  {
+    name: "Tables",
+    href: "/tables",
+    icon: <MdOutlineTableBar />,
   },
 
   {
