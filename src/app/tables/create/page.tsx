@@ -2,9 +2,10 @@ import HydrogenLayout from "@/components/layouts/layout";
 import PageHeader from "@/components/page-header";
 import Link from "next/link";
 import { Button } from "rizzui";
+import CreateTable from "./CreateTable";
 
 const pageHeader = {
-  title: "Ajouter une commande",
+  title: "Ajouter une table",
   breadcrumb: [
     {
       href: "/",
@@ -30,6 +31,7 @@ export default function CreateTablePage() {
           </Button>
         </Link>
       </PageHeader>
+      <CreateTable />
     </HydrogenLayout>
   );
 }

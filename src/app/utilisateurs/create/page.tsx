@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "rizzui";
 
 const pageHeader = {
-  title: "Créer un utilisateur",
+  title: "Ajouter un utilisateur",
   breadcrumb: [
     {
       href: "/",

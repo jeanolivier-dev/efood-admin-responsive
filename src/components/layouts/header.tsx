@@ -76,7 +76,7 @@ function MobileSidebar({ isOpen }: { isOpen: boolean }) {
           aria-label="Site Logo"
           className="text-gray-800 hover:text-gray-900"
         >
-          <Image src={authLogoImg} alt="Isomorphic" className="dark:invert" />
+          <Image src={authLogoImg} alt="Efood" className="dark:invert" />
         </Link>
       </div>
 

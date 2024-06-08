@@ -5,7 +5,7 @@ import { Button } from "rizzui";
 import Link from "next/link";
 
 const pageHeader = {
-  title: "Créer un menu",
+  title: "Ajouter un menu",
   breadcrumb: [
     {
       href: "/",
@@ -16,7 +16,7 @@ const pageHeader = {
       name: "Menu",
     },
     {
-      name: "Créer un menu",
+      name: "Ajouter un menu",
     },
   ],
 };

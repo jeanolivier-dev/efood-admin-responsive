@@ -49,26 +49,6 @@ const data = [
     unRead: true,
     sendTime: "2023-06-01T09:35:31.820Z",
   },
-  {
-    id: 6,
-    name: "3 new application design concepts added",
-    icon: <BulbSolidIcon />,
-    unRead: true,
-    sendTime: "2023-05-15T09:35:31.820Z",
-  },
-  {
-    id: 7,
-    name: "Your order has been placed",
-    icon: <ParcelMapIcon />,
-    unRead: false,
-    sendTime: "2023-05-16T09:35:31.820Z",
-  },
-  {
-    name: "Order has been shipped to #123221",
-    icon: <TruckSolidIcon />,
-    unRead: false,
-    sendTime: "2023-05-01T09:35:31.820Z",
-  },
 ];
 
 function NotificationsList({
@@ -80,7 +60,7 @@ function NotificationsList({
     <div className="w-[320px] text-left sm:w-[360px] 2xl:w-[420px] rtl:text-right">
       <div className="mb-3 flex items-center justify-between ps-6">
         <Title as="h5">Notifications</Title>
-        <Checkbox label="Mark All As Read" />
+        <Checkbox label="Tout marquer comme lu" />
       </div>
       <div className="max-h-[420px]">
         <div className="grid cursor-pointer grid-cols-1 gap-1 ps-4">
@@ -125,7 +105,7 @@ function NotificationsList({
         onClick={() => setIsOpen(false)}
         className="-me-6 block px-6 pb-0.5 pt-3 text-center hover:underline"
       >
-        View All Activity
+        Afficher toutes les activités
       </Link>
     </div>
   );

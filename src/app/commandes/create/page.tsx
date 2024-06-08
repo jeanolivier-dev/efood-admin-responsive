@@ -5,7 +5,7 @@ import { Button } from "rizzui";
 import CreateOrder from "./CreateOrder";
 
 const pageHeader = {
-  title: "Commandes",
+  title: "Créer une commande",
   breadcrumb: [
     {
       href: "/",
@@ -16,7 +16,7 @@ const pageHeader = {
       name: "Commandes",
     },
     {
-      name: "Ajouter une commande",
+      name: "Créer une commande",
     },
   ],
 };

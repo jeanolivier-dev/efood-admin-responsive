@@ -42,77 +42,6 @@ const data = [
     unRead: false,
     sendTime: "2023-06-01T09:35:31.820Z",
   },
-  {
-    id: 4,
-    message: `You: But you'll need to type in every possible word. Omnis,
-        quidem non. Sint inventore quasi temporibus architecto eaque,
-        natus aspernatur minus?`,
-    avatar: [
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-07.webp",
-    ],
-    name: "John Doe",
-    unRead: false,
-    sendTime: "2023-05-21T09:35:31.820Z",
-  },
-  {
-    id: 5,
-    message: `They were delighted and set to work immediately. Sint inventore quasi temporibus architecto eaque,
-        natus aspernatur minus?`,
-    avatar: [
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-14.webp",
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-13.webp",
-    ],
-    name: "Design & Frontend",
-    unRead: true,
-    sendTime: "2023-06-01T09:35:31.820Z",
-  },
-  {
-    id: 6,
-    message: `Hows going everything in our laravel project. Omnis,
-        quidem non. Sint inventore quasi temporibus architecto eaque,
-        natus aspernatur minus?`,
-    avatar: [
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-01.webp",
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-05.webp",
-    ],
-    name: "Laravel",
-    unRead: true,
-    sendTime: "2023-05-15T09:35:31.820Z",
-  },
-  {
-    id: 7,
-
-    name: "WordPress",
-    avatar: [
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-08.webp",
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-09.webp",
-    ],
-    unRead: false,
-    sendTime: "2023-05-16T09:35:31.820Z",
-  },
-  {
-    id: 8,
-    message: `You: which is actually pretty clever and funny, inventore quasi temporibus architecto eaque,
-        natus aspernatur minus?`,
-    avatar: [
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-11.webp",
-    ],
-    name: "Jenny Doe",
-    unRead: false,
-    sendTime: "2023-05-01T09:35:31.820Z",
-  },
-  {
-    id: 9,
-    message: `You could try ELIZA bot, it was a software tween herself. Omnis,
-        quidem non. Sint inventore quasi temporibus architecto eaque,
-        natus aspernatur minus?`,
-    avatar: [
-      "https://isomorphic-furyroad.s3.amazonaws.com/public/avatars/avatar-03.webp",
-    ],
-    name: "Bruce Warren",
-    unRead: true,
-    sendTime: "2023-04-01T09:35:31.820Z",
-  },
 ];
 
 function MessagesList({
@@ -129,7 +58,7 @@ function MessagesList({
           onClick={() => setIsOpen(false)}
           className="hover:underline"
         >
-          View all
+          Voir tout
         </Link>
       </div>
       <div className="grid grid-cols-1 ps-4">

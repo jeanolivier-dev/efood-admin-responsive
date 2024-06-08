@@ -44,37 +44,7 @@ export default function Home() {
           </CardFooter>
         </Card>
       </div>
-      <div className="pb-4 grid gap-4 sm:grid-cols-2 ">
-        <Card x-chunk="dashboard-05-chunk-1">
-          <CardHeader className="pb-2">
-            <CardDescription>Cette semaine</CardDescription>
-            <CardTitle className="text-4xl">502 500 CFA</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-xs text-muted-foreground">
-              +25% par rapport à la semaine dernière
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Progress value={25} aria-label="25% increase" />
-          </CardFooter>
-        </Card>
-        <Card x-chunk="dashboard-05-chunk-2">
-          <CardHeader className="pb-2">
-            <CardDescription>Ce mois</CardDescription>
-            <CardTitle className="text-4xl">2 535 500 CFA</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-xs text-muted-foreground">
-              +10% par rapport au mois dernier
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Progress value={12} aria-label="12% increase" />
-          </CardFooter>
-        </Card>
-      </div>
-      <div>
+      <div className="pb-4">
         <Card>
           <CardHeader>
             <CardTitle>Commandes</CardTitle>
@@ -173,6 +143,36 @@ export default function Home() {
               </TableBody>
             </Table>
           </CardContent>
+        </Card>
+      </div>
+      <div className="pb-4 grid gap-4 sm:grid-cols-2 ">
+        <Card x-chunk="dashboard-05-chunk-1">
+          <CardHeader className="pb-2">
+            <CardDescription>Cette semaine</CardDescription>
+            <CardTitle className="text-4xl">502 500 CFA</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xs text-muted-foreground">
+              +25% par rapport à la semaine dernière
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Progress value={25} aria-label="25% increase" />
+          </CardFooter>
+        </Card>
+        <Card x-chunk="dashboard-05-chunk-2">
+          <CardHeader className="pb-2">
+            <CardDescription>Ce mois</CardDescription>
+            <CardTitle className="text-4xl">2 535 500 CFA</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xs text-muted-foreground">
+              +10% par rapport au mois dernier
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Progress value={12} aria-label="12% increase" />
+          </CardFooter>
         </Card>
       </div>
     </HydrogenLayout>

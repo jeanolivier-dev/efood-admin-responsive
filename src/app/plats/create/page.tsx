@@ -6,7 +6,7 @@ import { Button } from "rizzui";
 import CreateDishe from "@/app/plats/create/CreateDishe";
 
 const pageHeader = {
-  title: "Créer un plat",
+  title: "Ajouter un plat",
   breadcrumb: [
     {
       href: "/",
