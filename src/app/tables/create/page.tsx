@@ -2,36 +2,34 @@ import HydrogenLayout from "@/components/layouts/layout";
 import PageHeader from "@/components/page-header";
 import Link from "next/link";
 import { Button } from "rizzui";
-import CreateOrder from "./CreateOrder";
 
 const pageHeader = {
-  title: "Commandes",
+  title: "Ajouter une commande",
   breadcrumb: [
     {
       href: "/",
       name: "Tableau de bord",
     },
     {
-      href: "/commandes",
-      name: "Commandes",
+      href: "/tables",
+      name: "Tables",
     },
     {
-      name: "Ajouter une commande",
+      name: "Ajouter une table",
     },
   ],
 };
 
-export default function CreateOrderPage() {
+export default function CreateTablePage() {
   return (
     <HydrogenLayout>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
-        <Link href="/commandes" className="mt-4 w-full @lg:mt-0 @lg:w-auto">
+        <Link href="/tables" className="mt-4 w-full @lg:mt-0 @lg:w-auto">
           <Button as="span" className="w-full @lg:w-auto" variant="outline">
             Annuler
           </Button>
         </Link>
       </PageHeader>
-      <CreateOrder />
     </HydrogenLayout>
   );
 }

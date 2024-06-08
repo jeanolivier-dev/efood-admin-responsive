@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input, Text, FileInput, Button } from "rizzui";
+import { Input, Text, FileInput, Button, Password } from "rizzui";
 import cn from "@/utils/class-names";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
@@ -29,7 +29,6 @@ interface IndexProps {
 const AddDisheSchema = z.object({
   name: z.string(),
   description: z.string(),
-  sku: z.string(),
   price: z.preprocess(
     (a) => parseInt(z.string().parse(a), 10),
     z.number().positive().min(1)
@@ -40,7 +39,7 @@ const AddDisheSchema = z.object({
 });
 export type TAddDisheSchema = z.infer<typeof AddDisheSchema>;
 
-export default function CreateDishe({ className }: IndexProps) {
+export default function CreateUser({ className }: IndexProps) {
   const {
     register,
     handleSubmit,
@@ -61,21 +60,16 @@ export default function CreateDishe({ className }: IndexProps) {
   const [state, setState] = React.useState<any>("");
   const [value, setValue] = useState(null);
 
-  const menu_select = [
+  const role_select = [
     {
       id: 1,
-      menu: "Entrée",
-      value: "entrée",
+      menu: "Admin",
+      value: "admin",
     },
     {
       id: 2,
-      menu: "Plats",
-      value: "plats",
-    },
-    {
-      id: 3,
-      menu: "Desserts",
-      value: "desserts",
+      menu: "Customer",
+      value: "customer",
     },
   ];
 
@@ -102,18 +96,38 @@ export default function CreateDishe({ className }: IndexProps) {
           >
             <Input
               label="Nom"
-              placeholder="Nom du plat"
+              placeholder="Entrez le nom"
               {...register("name")}
             />
-
+            <Input
+              type="email"
+              label="Email"
+              placeholder="Entrez l'adresse email"
+            />
+            <Input
+              type="tel"
+              label="Téléphone"
+              placeholder="Entrez le numéro de téléphone"
+            />
+            <Password
+              label="Mot de passe"
+              placeholder="Entrez le mot de passe"
+            />
+            <QuillEditor
+              // value={value}
+              onChange={() => register("description")}
+              label="Adresse"
+              className="col-span-full [&_.ql-editor]:min-h-[100px]"
+              labelClassName="font-medium text-gray-700 dark:text-gray-600 mb-1.5"
+            />
             <div>
-              <label className="font-medium">Menu</label>
+              <label className="font-medium">Rôle</label>
               <Select>
                 <SelectTrigger className="w-200px">
-                  <SelectValue placeholder="Sélectionnez un menu" />
+                  <SelectValue placeholder="Sélectionnez un rôle" />
                 </SelectTrigger>
                 <SelectContent className="bg-white ">
-                  {menu_select.map(({ id, menu, value }) => (
+                  {role_select.map(({ id, menu, value }) => (
                     <SelectItem
                       className="hover:bg-anzac-500 hover:text-white rounded-md"
                       key={id}
@@ -125,14 +139,12 @@ export default function CreateDishe({ className }: IndexProps) {
                 </SelectContent>
               </Select>
             </div>
-
             {/**             <Select
               label="Sélectionnez un menu"
               options={options}
               value={value}
               onChange={setValue}
             />*/}
-
             <div>
               <label className="font-medium">Status</label>
               <Select>
@@ -152,27 +164,6 @@ export default function CreateDishe({ className }: IndexProps) {
                 </SelectContent>
               </Select>
             </div>
-
-            <QuillEditor
-              // value={value}
-              onChange={() => register("description")}
-              label="Description"
-              className="col-span-full [&_.ql-editor]:min-h-[100px]"
-              labelClassName="font-medium text-gray-700 dark:text-gray-600 mb-1.5"
-            />
-          </FormGroup>
-          <FormGroup
-            title="Prix"
-            description="Ajoutez le prix du plat ici"
-            className="pt-8"
-          >
-            <Input
-              placeholder="0"
-              {...register("price")}
-              error={errors.price?.message as string}
-              prefix={"CFA"}
-              type="number"
-            />
           </FormGroup>
           <FormGroup
             title="Image miniature"

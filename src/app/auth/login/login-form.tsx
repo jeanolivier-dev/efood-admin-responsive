@@ -1,23 +1,69 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Input, Text, Button, Password, Switch } from "rizzui";
+import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginSchema = z.object({
+  email: z.string().email({ message: "Veuillez insérer votre adresse email" }),
+  password: z
+    .string()
+    .min(8, { message: "Veuillez insérez votre mot de passe" }),
+});
+
+type TLoginSchema = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TLoginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  async function submitHandler(data: TLoginSchema) {
+    console.log(data.email, data.password);
+  }
+
+  console.log();
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <div className="space-y-5 lg:space-y-6">
-          <Input
-            type="email"
-            label="Email"
-            placeholder="Entrez votre email"
-            className="[&>label>span]:font-medium"
-          />
-          <Password
-            label="Mot de passe"
-            placeholder="Entrez votre mot de passe"
-            className="[&>label>span]:font-medium"
-          />
+          <div>
+            {" "}
+            <Input
+              type="email"
+              label="Email"
+              placeholder="Entrez votre email"
+              className="[&>label>span]:font-medium"
+              required
+              {...register("email")}
+            />
+            {errors.email && (
+              <span className="text-red-500">{errors.email.message}</span>
+            )}
+          </div>
+
+          <div>
+            <Password
+              label="Mot de passe"
+              placeholder="Entrez votre mot de passe"
+              className="[&>label>span]:font-medium"
+              required
+              {...register("password")}
+            />
+            {errors.password && (
+              <span className="text-red-500">{errors.password.message}</span>
+            )}
+          </div>
+
           <div className="flex items-center justify-between lg:pb-2">
             <Switch label="Se souvenir de moi" />
             <Link

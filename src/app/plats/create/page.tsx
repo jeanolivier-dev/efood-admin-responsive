@@ -6,7 +6,7 @@ import { Button } from "rizzui";
 import CreateDishe from "@/app/plats/create/CreateDishe";
 
 const pageHeader = {
-  title: "Créer un menu",
+  title: "Créer un plat",
   breadcrumb: [
     {
       href: "/",
@@ -26,7 +26,7 @@ export default function CreateDishePage() {
   return (
     <>
       <HydrogenLayout>
-        <PageHeader title="Créer un plat" breadcrumb={pageHeader.breadcrumb}>
+        <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
           <Link href="/plats" className="mt-4 w-full @lg:mt-0 @lg:w-auto">
             <Button as="span" className="w-full @lg:w-auto" variant="outline">
               Annuler
