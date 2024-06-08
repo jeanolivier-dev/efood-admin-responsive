@@ -37,7 +37,6 @@ export default function LoginForm() {
       <form onSubmit={handleSubmit(submitHandler)}>
         <div className="space-y-5 lg:space-y-6">
           <div>
-            {" "}
             <Input
               type="email"
               label="Email"
