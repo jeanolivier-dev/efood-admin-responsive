@@ -24,7 +24,7 @@ const signupSchema = z
     message: "Les mots de passes doivent être identiques",
     path: ["confirmPassword"],
   })
-  .refine((data) => data.has_accepted === true, {
+  .refine((data) => data.has_accepted, {
     message: "Ce champ est requis",
     path: ["has_accepted"],
   });
@@ -45,7 +45,7 @@ export default function SignUpForm() {
 
   async function onSubmit(data: TSignupSchema) {
     Register(data)
-      .then((res) => reset())
+      .then(() => reset())
       .then(() => router.push("/auth/login"));
   }
 
