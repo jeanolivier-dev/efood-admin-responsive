@@ -13,8 +13,8 @@ export default function Login() {
           Connectez vous pour utiliser votre menu digital.
         </>
       }
-      isSignIn
-      isSocialLoginActive={true}
+      //isSignIn
+      //isSocialLoginActive={true}
     >
       <LoginForm />
     </AuthWrapper>

@@ -27,10 +27,13 @@ export default function LoginForm() {
   });
 
   async function submitHandler(data: TLoginSchema) {
-    console.log(data.email, data.password);
+    await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: true,
+      callbackUrl: "/",
+    });
   }
-
-  console.log();
 
   return (
     <>

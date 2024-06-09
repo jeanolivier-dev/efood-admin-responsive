@@ -14,7 +14,7 @@ export default function SignUpPage() {
           Inscrivez vous pour profiter de notre menu digital
         </>
       }
-      isSocialLoginActive={true}
+      //isSocialLoginActive={true}
     >
       <SignUpForm />
     </AuthWrapper>

@@ -6,27 +6,37 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { Register } from "@/action/user";
 
 const signupSchema = z
   .object({
+    name: z.string({ message: "Champ requis" }),
     email: z.string().email({ message: "Adresse email invalide" }),
     password: z
       .string()
       .min(8, { message: "Veuillez insérez 8 caractères minimun" }),
     confirmPassword: z.string(),
+    has_accepted: z.boolean(),
+    phone: z.string({ message: "Champ requis" }),
+    address: z.string({ message: "Champ requis" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Les mots de passes doivent être identiques",
     path: ["confirmPassword"],
+  })
+  .refine((data) => data.has_accepted === true, {
+    message: "Ce champ est requis",
+    path: ["has_accepted"],
   });
 
-type TSignupSchema = z.infer<typeof signupSchema>;
+export type TSignupSchema = z.infer<typeof signupSchema>;
 
 export default function SignUpForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<TSignupSchema>({
     resolver: zodResolver(signupSchema),
   });
@@ -34,12 +44,26 @@ export default function SignUpForm() {
   const router = useRouter();
 
   async function onSubmit(data: TSignupSchema) {
-    console.log(data.email, data.password, data.confirmPassword);
+    Register(data)
+      .then((res) => reset())
+      .then(() => router.push("/auth/login"));
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-5 lg:space-y-6">
+        <div>
+          <Input
+            type="text"
+            label="Nom"
+            placeholder="Entrez votre nom"
+            className="[&>label>span]:font-medium"
+            {...register("name")}
+          />
+          {errors.name && (
+            <span className="text-red-500">{errors.name.message}</span>
+          )}
+        </div>
         <div>
           <Input
             type="email"
@@ -75,10 +99,35 @@ export default function SignUpForm() {
             </span>
           )}
         </div>
+        <div>
+          <Input
+            type="tel"
+            label="Téléphone"
+            placeholder="Entrez votre numéro de téléphone"
+            className="[&>label>span]:font-medium"
+            {...register("phone")}
+          />
+          {errors.phone && (
+            <span className="text-red-500">{errors.phone.message}</span>
+          )}
+        </div>
+        <div>
+          <Input
+            type="text"
+            label="Adresse"
+            placeholder="Entrez votre adresse"
+            className="[&>label>span]:font-medium"
+            {...register("address")}
+          />
+          {errors.address && (
+            <span className="text-red-500">{errors.address.message}</span>
+          )}
+        </div>
 
-        <div className="col-span-2 flex items-start pb-1 text-gray-700">
+        <div className="flex-col col-span-2 flex items-start pb-1 text-gray-700">
           <Switch
             className="[&>label>span.transition]:shrink-0 [&>label>span]:font-medium"
+            {...register("has_accepted")}
             label={
               <Text className="ps-1 text-gray-500">
                 En vous inscrivant, vous acceptez nos{" "}
@@ -98,8 +147,16 @@ export default function SignUpForm() {
               </Text>
             }
           />
+          {errors.has_accepted && (
+            <span className="text-red-500">{errors.has_accepted.message}</span>
+          )}
         </div>
-        <Button type="submit" className="w-full" color="primary">
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          className="w-full"
+          color="primary"
+        >
           S&apos;inscrire
         </Button>
       </div>

@@ -17,6 +17,7 @@ export const Users = pgTable("Users", {
   image: varchar("image"),
   role: text("role").$type<"admin" | "client">().default("client"),
   is_active: boolean("is_active").default(true),
+  has_accepted: boolean("has_accepted").default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
 export type UserType = typeof Users.$inferSelect;
