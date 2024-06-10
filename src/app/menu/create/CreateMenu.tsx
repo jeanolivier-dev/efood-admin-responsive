@@ -49,11 +49,11 @@ export default function CreateMenu() {
         </div>
         <div
           className={cn(
-            "sticky bottom-0 z-40 flex items-center justify-end gap-3 bg-gray-0/10 backdrop-blur @lg:gap-4 @xl:grid @xl:auto-cols-max @xl:grid-flow-col"
+            "z-40 flex items-center justify-end gap-3 bg-gray-0/10  @lg:gap-4 @xl:grid @xl:auto-cols-max @xl:grid-flow-col"
           )}
         >
           <Button type="submit" className="w-full pt-4 @xl:w-auto">
-            Créer le menu
+            Ajouter le menu
           </Button>
         </div>
       </form>

@@ -195,7 +195,7 @@ export default function CreateDishe({ className }: IndexProps) {
           )}
         >
           <Button type="submit" className="w-full @xl:w-auto">
-            Créer le plat
+            Ajouter le plat
           </Button>
         </div>
       </form>
