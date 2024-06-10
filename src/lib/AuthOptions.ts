@@ -1,19 +1,27 @@
 import { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { Users } from "@/database/schema";
+import {Users, UserType} from "@/database/schema";
 import { db } from "@/database/dbConnection";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
+import {User} from "@/type/interfaces";
 
 export const authOptions: AuthOptions = {
   providers: [
     Credentials({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'mail@example.com',
+        },
+        password: {
+          label: 'Password',
+          type: 'password',
+        },
       },
-      async authorize(credentials) {
+      async authorize(credentials:any) {
         const user =
           credentials &&
           (await db
@@ -44,10 +52,12 @@ export const authOptions: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      if(user) token.user = user as User
+      return token
+      // return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token;
+      session.user = token.user;
       return session;
     },
   },

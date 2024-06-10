@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="782d766c-1168-40b4-a393-4a5ebc628bea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/action/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/action/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/signup/sign-up-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signup/sign-up-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/profil-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/profil-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/AuthOptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/AuthOptions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,7 +76,7 @@
       <workItem from="1717347815573" duration="3499000" />
       <workItem from="1717874668363" duration="160000" />
       <workItem from="1717874844900" duration="3610000" />
-      <workItem from="1717960894006" duration="736000" />
+      <workItem from="1717960894006" duration="6201000" />
     </task>
     <servers />
   </component>

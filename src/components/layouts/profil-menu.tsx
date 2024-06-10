@@ -2,10 +2,11 @@
 
 import { Title, Text, Avatar, Button, Popover } from "rizzui";
 import cn from "@/utils/class-names";
-// import { signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import {useSession} from "next-auth/react";
 
 const menuItems = [
   {
@@ -23,6 +24,8 @@ const menuItems = [
 ];
 
 function DropdownMenu() {
+  const {data:session} = useSession()
+  console.log(session)
   return (
     <div className="w-64 text-left rtl:text-right">
       <div className="flex items-center border-b border-gray-300 px-6 pb-5 pt-6">
@@ -52,7 +55,7 @@ function DropdownMenu() {
         <Button
           className="h-auto w-full justify-start p-0 font-medium text-gray-700 outline-none focus-within:text-gray-600 hover:text-gray-900 focus-visible:ring-0"
           variant="text"
-          // onClick={() => signOut()}
+          onClick={() => signOut()}
         >
           Déconnexion
         </Button>
