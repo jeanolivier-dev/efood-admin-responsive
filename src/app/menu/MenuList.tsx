@@ -95,11 +95,7 @@ export default function MenuList() {
                   <TableCell className="font-medium sr-only">
                     {description}
                   </TableCell>
-                  <TableCell>
-                    <TableCell className="font-medium">
-                      {dishes_amount}
-                    </TableCell>
-                  </TableCell>
+                  <TableCell className="font-medium">{dishes_amount}</TableCell>
                   <TableCell className="hidden md:table-cell">
                     {created_at}
                   </TableCell>

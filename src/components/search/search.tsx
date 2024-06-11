@@ -53,7 +53,7 @@ export default function SearchWidget({
         placeholderClassName={placeholderClassName}
       />*/}
 
-      <Dialog>
+      {/*<Dialog>
         <DialogTrigger asChild>
           <SearchTrigger
             icon={icon}
@@ -76,7 +76,7 @@ export default function SearchWidget({
             <Button type="submit">Save changes</Button>
           </DialogFooter>
         </DialogContent>
-      </Dialog>
+      </Dialog>*/}
 
       {/*<Modal
         isOpen={open}

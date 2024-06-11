@@ -22,6 +22,20 @@
       "when": 1717939918190,
       "tag": "0002_aberrant_silver_fox",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1718113651828,
+      "tag": "0003_lazy_lionheart",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1718113757487,
+      "tag": "0004_married_bedlam",
+      "breakpoints": true
     }
   ]
 }
