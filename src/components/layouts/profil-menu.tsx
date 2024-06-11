@@ -2,11 +2,11 @@
 
 import { Title, Text, Avatar, Button, Popover } from "rizzui";
 import cn from "@/utils/class-names";
-import { signOut } from 'next-auth/react';
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const menuItems = [
   {
@@ -24,8 +24,8 @@ const menuItems = [
 ];
 
 function DropdownMenu() {
-  const {data:session} = useSession()
-  console.log(session)
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <div className="w-64 text-left rtl:text-right">
       <div className="flex items-center border-b border-gray-300 px-6 pb-5 pt-6">

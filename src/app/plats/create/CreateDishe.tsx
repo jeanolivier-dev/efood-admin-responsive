@@ -1,21 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
-import toast from "react-hot-toast";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input, Text, FileInput, Button } from "rizzui";
+import { Input, FileInput, Button } from "rizzui";
 import cn from "@/utils/class-names";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
-import QuillEditor from "@/components/ui/quill-editor";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -29,14 +27,13 @@ interface IndexProps {
 const AddDisheSchema = z.object({
   name: z.string(),
   description: z.string(),
-  sku: z.string(),
   price: z.preprocess(
     (a) => parseInt(z.string().parse(a), 10),
     z.number().positive().min(1)
   ),
-  online: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  menu: z.string(),
-  image: z.string(),
+  //Status: z.string(),
+  //menu: z.string(),
+  //image: z.string(),
 });
 export type TAddDisheSchema = z.infer<typeof AddDisheSchema>;
 
@@ -53,13 +50,10 @@ export default function CreateDishe({ className }: IndexProps) {
   });
 
   const onSubmit = (data: TAddDisheSchema) => {
-    console.log("product_data", data);
-    toast.success(<Text as="b">Plat crée</Text>);
-    reset();
+    console.log(data);
   };
 
   const [state, setState] = React.useState<any>("");
-  const [value, setValue] = useState(null);
 
   const menu_select = [
     {
@@ -106,61 +100,58 @@ export default function CreateDishe({ className }: IndexProps) {
               {...register("name")}
             />
 
-            <div>
-              <label className="font-medium">Menu</label>
-              <Select>
-                <SelectTrigger className="w-200px">
-                  <SelectValue placeholder="Sélectionnez un menu" />
-                </SelectTrigger>
-                <SelectContent className="bg-white ">
-                  {menu_select.map(({ id, menu, value }) => (
-                    <SelectItem
-                      className="hover:bg-anzac-500 hover:text-white rounded-md"
-                      key={id}
-                      value={value}
-                    >
-                      {menu}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="grid gap-6">
+              <div className="grid gap-3">
+                <Label htmlFor="status">Status</Label>
+                <Select>
+                  <SelectTrigger id="status" aria-label="Select status">
+                    <SelectValue placeholder="Sélectionnez un status" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white ">
+                    {status_select.map(({ id, status, value }) => (
+                      <SelectItem
+                        key={id}
+                        value={value}
+                        className="hover:bg-anzac-500 hover:text-white rounded-md"
+                      >
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="status">Menu</Label>
+                <Select>
+                  <SelectTrigger id="status" aria-label="Select status">
+                    <SelectValue placeholder="Sélectionnez un menu" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white ">
+                    {menu_select.map(({ id, menu, value }) => (
+                      <SelectItem
+                        key={id}
+                        value={value}
+                        className="hover:bg-anzac-500 hover:text-white rounded-md"
+                      >
+                        {menu}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-
-            {/**             <Select
-              label="Sélectionnez un menu"
-              options={options}
-              value={value}
-              onChange={setValue}
-            />*/}
-
-            <div>
-              <label className="font-medium">Status</label>
-              <Select>
-                <SelectTrigger className="w-200px">
-                  <SelectValue placeholder="Sélectionnez un status" />
-                </SelectTrigger>
-                <SelectContent className="bg-white ">
-                  {status_select.map(({ id, status, value }) => (
-                    <SelectItem
-                      className="hover:bg-anzac-500 hover:text-white rounded-md"
-                      key={id}
-                      value={value}
-                    >
-                      {status}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="col-span-2">
+              <div className="grid w-200px gap-1.5">
+                <Label htmlFor="message">Description</Label>
+                <Textarea
+                  placeholder="Type your message here."
+                  id="message"
+                  {...register("description")}
+                />
+              </div>
             </div>
-
-            <QuillEditor
-              // value={value}
-              onChange={() => register("description")}
-              label="Description"
-              className="col-span-full [&_.ql-editor]:min-h-[100px]"
-              labelClassName="font-medium text-gray-700 dark:text-gray-600 mb-1.5"
-            />
           </FormGroup>
+
           <FormGroup
             title="Prix"
             description="Ajoutez le prix du plat ici"
@@ -194,7 +185,11 @@ export default function CreateDishe({ className }: IndexProps) {
             "z-40 flex items-center justify-end gap-3 bg-gray-0/10  @lg:gap-4 @xl:grid @xl:auto-cols-max @xl:grid-flow-col"
           )}
         >
-          <Button type="submit" className="w-full @xl:w-auto">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full @xl:w-auto"
+          >
             Ajouter le plat
           </Button>
         </div>
