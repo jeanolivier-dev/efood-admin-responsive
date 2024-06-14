@@ -3,20 +3,14 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input, FileInput, Button } from "rizzui";
+import { FileInput, Button } from "rizzui";
 import cn from "@/utils/class-names";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { MenuType } from "@/database/schema";
 
 interface IndexProps {
   slug?: string;
@@ -31,13 +25,19 @@ const AddDisheSchema = z.object({
     (a) => parseInt(z.string().parse(a), 10),
     z.number().positive().min(1)
   ),
-  //Status: z.string(),
-  //menu: z.string(),
+  status: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
+  menu: z.string(),
   //image: z.string(),
 });
 export type TAddDisheSchema = z.infer<typeof AddDisheSchema>;
 
-export default function CreateDishe({ className }: IndexProps) {
+export default function CreateDishe({
+  className,
+  menu,
+}: {
+  className?: IndexProps;
+  menu: MenuType[];
+}) {
   const {
     register,
     handleSubmit,
@@ -55,29 +55,6 @@ export default function CreateDishe({ className }: IndexProps) {
 
   const [state, setState] = React.useState<any>("");
 
-  const menu_select = [
-    {
-      id: 1,
-      menu: "Entrée",
-      value: "entrée",
-    },
-    {
-      id: 2,
-      menu: "Plats",
-      value: "plats",
-    },
-    {
-      id: 3,
-      menu: "Desserts",
-      value: "desserts",
-    },
-  ];
-
-  const status_select = [
-    { id: 1, status: "Activé", value: "Activé" },
-    { id: 2, status: "Désactivé", value: "Désactivé" },
-  ];
-
   return (
     <div className="@container">
       <div className={cn("z-[999] 2xl:top-[72px]")} />
@@ -94,57 +71,54 @@ export default function CreateDishe({ className }: IndexProps) {
             description="Rédigez la description de votre produit et les informations nécessaires à partir d'ici"
             className={cn(className)}
           >
-            <Input
-              label="Nom"
-              placeholder="Nom du plat"
-              {...register("name")}
-            />
-
-            <div className="grid gap-6">
-              <div className="grid gap-3">
-                <Label htmlFor="status">Status</Label>
-                <Select>
-                  <SelectTrigger id="status" aria-label="Select status">
-                    <SelectValue placeholder="Sélectionnez un status" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white ">
-                    {status_select.map(({ id, status, value }) => (
-                      <SelectItem
-                        key={id}
-                        value={value}
-                        className="hover:bg-anzac-500 hover:text-white rounded-md"
-                      >
-                        {status}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="status">Menu</Label>
-                <Select>
-                  <SelectTrigger id="status" aria-label="Select status">
-                    <SelectValue placeholder="Sélectionnez un menu" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white ">
-                    {menu_select.map(({ id, menu, value }) => (
-                      <SelectItem
-                        key={id}
-                        value={value}
-                        className="hover:bg-anzac-500 hover:text-white rounded-md"
-                      >
-                        {menu}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <Label htmlFor="email">Nom</Label>
+              <Input
+                id="name"
+                placeholder="Nom du plat"
+                {...register("name")}
+              />
             </div>
+
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <Label>Status</Label>
+              <select
+                id="isActive"
+                className={cn(
+                  "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+                  className
+                )}
+                {...register("status")}
+              >
+                <option value="Général">Sélectionnez un status</option>
+                <option value={1}>Activé</option>
+                <option value={0}>Désactivé</option>
+              </select>
+            </div>
+
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <Label>Menu</Label>
+              <select
+                className={cn(
+                  "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+                  className
+                )}
+                {...register("menu")}
+              >
+                <option value="Général">Sélectionnez un menu</option>
+                {menu.map(({ user_id, name }, i) => (
+                  <option key={i} value={user_id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="col-span-2">
-              <div className="grid w-200px gap-1.5">
+              <div className="grid w-200px gap-3">
                 <Label htmlFor="message">Description</Label>
                 <Textarea
-                  placeholder="Type your message here."
+                  placeholder="Description du plat"
                   id="message"
                   {...register("description")}
                 />
@@ -154,16 +128,16 @@ export default function CreateDishe({ className }: IndexProps) {
 
           <FormGroup
             title="Prix"
-            description="Ajoutez le prix du plat ici"
+            description="Ajoutez le prix du plat ici (montant en CFA)"
             className="pt-8"
           >
             <Input
               placeholder="0"
               {...register("price")}
-              error={errors.price?.message as string}
               prefix={"CFA"}
               type="number"
             />
+            {errors.price && <p>{errors.price.message}</p>}
           </FormGroup>
           <FormGroup
             title="Image miniature"

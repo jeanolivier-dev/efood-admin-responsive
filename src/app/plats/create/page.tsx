@@ -1,9 +1,10 @@
 import Link from "next/link";
 import HydrogenLayout from "@/components/layouts/layout";
-import { PiPlusBold } from "react-icons/pi";
 import PageHeader from "@/components/page-header";
 import { Button } from "rizzui";
 import CreateDishe from "@/app/plats/create/CreateDishe";
+import { db } from "@/database/dbConnection";
+import { Menu } from "@/database/schema";
 
 const pageHeader = {
   title: "Ajouter un plat",
@@ -22,7 +23,9 @@ const pageHeader = {
   ],
 };
 
-export default function CreateDishePage() {
+export default async function CreateDishePage() {
+  const menu = await db.select().from(Menu);
+
   return (
     <>
       <HydrogenLayout>
@@ -34,7 +37,7 @@ export default function CreateDishePage() {
           </Link>
         </PageHeader>
 
-        <CreateDishe />
+        <CreateDishe menu={menu} />
       </HydrogenLayout>
     </>
   );

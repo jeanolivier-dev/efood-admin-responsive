@@ -1,17 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import productImage from "@/app/assets/noproduct.jpg";
 import { MoreHorizontal } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,39 +20,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { MenuType } from "@/database/schema";
 
-export default function MenuList() {
-  const date = new Date();
-  const menu = [
-    {
-      id: 1,
-      name: "Entrée",
-      description: "Lorem Ipsum is simply dummy text",
-      dishes_amount: 4,
-      created_at: date.toDateString(),
-    },
-    {
-      id: 2,
-      name: "Plats principaux",
-      description: "Lorem Ipsum is simply dummy text",
-      dishes_amount: 4,
-      created_at: date.toDateString(),
-    },
-    {
-      id: 3,
-      name: "Desserts",
-      description: "Lorem Ipsum is simply dummy text",
-      dishes_amount: 4,
-      created_at: date.toDateString(),
-    },
-    {
-      id: 4,
-      name: "Boissons",
-      description: "Lorem Ipsum is simply dummy text",
-      dishes_amount: 4,
-      created_at: date.toDateString(),
-    },
-  ];
+export default function MenuList({ menu }: { menu: MenuType[] }) {
   return (
     <Card>
       <CardContent>
@@ -79,48 +42,42 @@ export default function MenuList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {menu.map(
-              ({ id, name, description, dishes_amount, created_at }) => (
-                <TableRow key={id}>
-                  <TableCell className="hidden sm:table-cell">
-                    <Image
-                      alt="Product image"
-                      className="aspect-square rounded-full object-cover"
-                      height="64"
-                      src={productImage}
-                      width="64"
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{name}</TableCell>
-                  <TableCell className="font-medium sr-only">
-                    {description}
-                  </TableCell>
-                  <TableCell className="font-medium">{dishes_amount}</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {created_at}
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          aria-haspopup="true"
-                          size="icon"
-                          variant="ghost"
-                        >
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className={"bg-white"}>
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Modifier</DropdownMenuItem>
-                        <DropdownMenuItem>Supprimer</DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              )
-            )}
+            {menu.map(({ user_id, name, description, created_at }) => (
+              <TableRow key={user_id}>
+                <TableCell className="hidden sm:table-cell">
+                  <Image
+                    alt="Product image"
+                    className="aspect-square rounded-full object-cover"
+                    height="64"
+                    src={productImage}
+                    width="64"
+                  />
+                </TableCell>
+                <TableCell className="font-medium">{name}</TableCell>
+                <TableCell className="font-medium sr-only">
+                  {description}
+                </TableCell>
+                <TableCell className="font-medium">4</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {created_at && created_at.getUTCDate()}
+                </TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button aria-haspopup="true" size="icon" variant="ghost">
+                        <MoreHorizontal className="h-4 w-4" />
+                        <span className="sr-only">Toggle menu</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className={"bg-white"}>
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuItem>Modifier</DropdownMenuItem>
+                      <DropdownMenuItem>Supprimer</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </CardContent>

@@ -69,18 +69,11 @@ export default function CreateMenu() {
               <div className="grid w-full gap-1.5">
                 <Label htmlFor="message">Description</Label>
                 <Textarea
-                  placeholder="Type your message here."
+                  placeholder="Description du menu."
                   id="message"
                   {...register("description")}
                 />
               </div>
-              {/*<QuillEditor
-                value={value}
-                onChange={setValue}
-                label="Description"
-                className="[&>.ql-container_.ql-editor]:min-h-[100px]"
-                labelClassName="font-medium text-gray-700 dark:text-gray-600 mb-1.5"
-              />*/}
             </div>
           </FormGroup>
           <FormGroup
