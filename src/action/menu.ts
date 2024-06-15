@@ -6,7 +6,7 @@ import { TAddMenuSchema } from "@/app/menu/create/CreateMenu";
 import { v4 as uuidv4 } from "uuid";
 
 interface Menu extends TAddMenuSchema {
-  user_id?: number;
+  user_id: string;
 }
 
 export async function NewMenu(data: Menu) {
