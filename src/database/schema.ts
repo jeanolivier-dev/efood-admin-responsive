@@ -51,7 +51,7 @@ export const Dishes = pgTable("Dishes", {
 
 export type DisheType = typeof Dishes.$inferSelect;
 
-export const Table = pgTable("Table", {
+export const Tables = pgTable("Tables", {
   table_id: serial("table_id").primaryKey().unique().notNull(),
   name: varchar("name", { length: 256 }).notNull(),
   qr_code: varchar("qr_code"),
@@ -61,14 +61,14 @@ export const Table = pgTable("Table", {
   created_at: timestamp("created_at").defaultNow(),
 });
 
-export type TableType = typeof Table.$inferSelect;
+export type TablesType = typeof Tables.$inferSelect;
 
 export const Order = pgTable("Order", {
   order_id: serial("order_id").primaryKey().unique().notNull(),
   status: varchar("status").notNull(),
   table_id: serial("table_id")
     .notNull()
-    .references(() => Table.table_id),
+    .references(() => Tables.table_id),
   dishes_id: serial("dishes_id")
     .notNull()
     .references(() => Dishes.dishe_id),

@@ -4,6 +4,8 @@ import { PiPlusBold } from "react-icons/pi";
 import { Button } from "rizzui";
 import PageHeader from "@/components/page-header";
 import DishesList from "@/app/plats/DishesList";
+import { db } from "@/database/dbConnection";
+import { Dishes } from "@/database/schema";
 
 const pageHeader = {
   title: "Plats",
@@ -18,7 +20,9 @@ const pageHeader = {
   ],
 };
 
-export default function DishesPage() {
+export default async function DishesPage() {
+  const dishes = await db.select().from(Dishes);
+
   return (
     <HydrogenLayout>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
@@ -31,7 +35,7 @@ export default function DishesPage() {
           </Link>
         </div>
       </PageHeader>
-      <DishesList />
+      <DishesList dishes={dishes} />
     </HydrogenLayout>
   );
 }

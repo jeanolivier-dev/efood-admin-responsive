@@ -1,1 +1,0 @@
-ALTER TABLE "Users" RENAME COLUMN "as_accepted" TO "has_accepted";

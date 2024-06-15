@@ -38,6 +38,22 @@ CREATE TABLE IF NOT EXISTS "Tables" (
 	CONSTRAINT "Tables_table_id_unique" UNIQUE("table_id")
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "Users" (
+	"user_id" serial PRIMARY KEY NOT NULL,
+	"name" varchar(256) NOT NULL,
+	"email" varchar(256) NOT NULL,
+	"password" varchar NOT NULL,
+	"phone" text NOT NULL,
+	"address" varchar NOT NULL,
+	"image" varchar,
+	"role" text DEFAULT 'client',
+	"is_active" boolean DEFAULT true,
+	"has_accepted" boolean DEFAULT false,
+	"created_at" timestamp DEFAULT now(),
+	CONSTRAINT "Users_user_id_unique" UNIQUE("user_id"),
+	CONSTRAINT "Users_email_unique" UNIQUE("email")
+);
+--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "Dishes" ADD CONSTRAINT "Dishes_menu_id_Menu_menu_id_fk" FOREIGN KEY ("menu_id") REFERENCES "public"."Menu"("menu_id") ON DELETE no action ON UPDATE no action;
 EXCEPTION

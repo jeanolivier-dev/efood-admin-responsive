@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Link from "next/link";
 import { MenuType } from "@/database/schema";
 
 export default function MenuList({ menu }: { menu: MenuType[] }) {
@@ -71,8 +72,16 @@ export default function MenuList({ menu }: { menu: MenuType[] }) {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className={"bg-white"}>
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>Modifier</DropdownMenuItem>
-                      <DropdownMenuItem>Supprimer</DropdownMenuItem>
+                      <Link href="#">
+                        <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
+                          Modifier
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link href="#">
+                        <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
+                          Supprimer
+                        </DropdownMenuItem>
+                      </Link>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

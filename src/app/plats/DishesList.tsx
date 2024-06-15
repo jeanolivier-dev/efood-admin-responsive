@@ -4,14 +4,7 @@ import { MoreHorizontal } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,36 +21,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+import { DisheType } from "@/database/schema";
 
-export default function DishesList() {
-  const date = new Date();
-  const dishe = [
-    {
-      id: 1,
-      name: "alloco",
-      description: "Lorem Ipsum is simply dummy text",
-      status: "Activé",
-      price: 500,
-      created_at: date.toDateString(),
-    },
-    {
-      id: 1,
-      name: "Attiéké",
-      description: "Lorem Ipsum is simply dummy text",
-      status: "Désactivé",
-      price: 500,
-      created_at: date.toDateString(),
-    },
-    {
-      id: 1,
-      name: "Poulet braisé",
-      description: "Lorem Ipsum is simply dummy text",
-      status: "Activé",
-      price: 5500,
-      created_at: date.toDateString(),
-    },
-  ];
-
+export default function DishesList({ dishes }: { dishes: DisheType[] }) {
   return (
     <Card>
       <CardContent>
@@ -80,9 +46,16 @@ export default function DishesList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {dishe.map(
-              ({ id, name, description, status, price, created_at }) => (
-                <TableRow key={id}>
+            {dishes.map(
+              ({
+                dishe_id,
+                name,
+                description,
+                is_active,
+                price,
+                created_at,
+              }) => (
+                <TableRow key={dishe_id}>
                   <TableCell className="hidden sm:table-cell">
                     <Image
                       alt="Product image"
@@ -97,11 +70,11 @@ export default function DishesList() {
                     {description}
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline">{status}</Badge>
+                    <Badge variant="outline">{is_active}</Badge>
                   </TableCell>
                   <TableCell>{price} CFA</TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {created_at}
+                    {created_at && created_at.getUTCDate()}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>

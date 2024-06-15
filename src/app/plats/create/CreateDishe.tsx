@@ -11,6 +11,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MenuType } from "@/database/schema";
+import { useSession } from "next-auth/react";
+import { NewDishe } from "@/action/plats";
+import { useRouter } from "next/navigation";
 
 interface IndexProps {
   slug?: string;
@@ -49,8 +52,16 @@ export default function CreateDishe({
     resolver: zodResolver(AddDisheSchema),
   });
 
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const onSubmit = (data: TAddDisheSchema) => {
-    console.log(data);
+    NewDishe({
+      ...data,
+      dishe_id: session?.user.user_id,
+    })
+      .then(() => reset())
+      .then(() => router.push("/plats"));
   };
 
   const [state, setState] = React.useState<any>("");

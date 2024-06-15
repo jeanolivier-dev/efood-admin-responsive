@@ -1,1 +1,0 @@
-ALTER TABLE "Users" ADD COLUMN "as_accepted" boolean DEFAULT false;
