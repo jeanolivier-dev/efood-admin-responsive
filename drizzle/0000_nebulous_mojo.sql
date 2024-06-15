@@ -1,45 +1,45 @@
 CREATE TABLE IF NOT EXISTS "Dishes" (
-	"dishe_id" serial PRIMARY KEY NOT NULL,
+	"dishe_id" uuid PRIMARY KEY NOT NULL,
 	"name" varchar(256) NOT NULL,
 	"description" varchar(512) NOT NULL,
 	"price" integer NOT NULL,
 	"is_active" boolean DEFAULT true,
 	"image" varchar,
-	"menu_id" serial NOT NULL,
+	"menu_id" uuid NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "Dishes_dishe_id_unique" UNIQUE("dishe_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "Menu" (
-	"menu_id" serial PRIMARY KEY NOT NULL,
+	"menu_id" uuid PRIMARY KEY NOT NULL,
 	"name" varchar(256) NOT NULL,
 	"description" varchar(512) NOT NULL,
 	"image" varchar,
-	"user_id" serial NOT NULL,
+	"user_id" uuid NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "Menu_menu_id_unique" UNIQUE("menu_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "Order" (
-	"order_id" serial PRIMARY KEY NOT NULL,
+	"order_id" uuid PRIMARY KEY NOT NULL,
 	"status" varchar NOT NULL,
-	"table_id" serial NOT NULL,
-	"dishes_id" serial NOT NULL,
+	"table_id" uuid NOT NULL,
+	"dishes_id" uuid NOT NULL,
 	"amount" integer NOT NULL,
 	CONSTRAINT "Order_order_id_unique" UNIQUE("order_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "Tables" (
-	"table_id" serial PRIMARY KEY NOT NULL,
+	"table_id" uuid PRIMARY KEY NOT NULL,
 	"name" varchar(256) NOT NULL,
 	"qr_code" varchar,
-	"user_id" serial NOT NULL,
+	"user_id" uuid NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "Tables_table_id_unique" UNIQUE("table_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "Users" (
-	"user_id" serial PRIMARY KEY NOT NULL,
+	"user_id" uuid PRIMARY KEY NOT NULL,
 	"name" varchar(256) NOT NULL,
 	"email" varchar(256) NOT NULL,
 	"password" varchar NOT NULL,

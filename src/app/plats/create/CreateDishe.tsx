@@ -14,6 +14,7 @@ import { MenuType } from "@/database/schema";
 import { useSession } from "next-auth/react";
 import { NewDishe } from "@/action/plats";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface IndexProps {
   slug?: string;
@@ -60,6 +61,7 @@ export default function CreateDishe({
       ...data,
       dishe_id: session?.user.user_id,
     })
+      .then(() => toast.success("Plat créé avec succès !"))
       .then(() => reset())
       .then(() => router.push("/plats"));
   };

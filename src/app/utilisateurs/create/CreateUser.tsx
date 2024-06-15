@@ -9,13 +9,13 @@ import cn from "@/utils/class-names";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
 import QuillEditor from "@/components/ui/quill-editor";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -23,21 +23,22 @@ import {
 interface IndexProps {
   slug?: string;
   className?: string;
-  product?: TAddDisheSchema;
+  product?: TAddUserSchema;
 }
 
-const AddDisheSchema = z.object({
+const AddUserSchema = z.object({
   name: z.string(),
-  description: z.string(),
-  price: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z.number().positive().min(1)
-  ),
-  online: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  menu: z.string(),
-  image: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  password: z.string(),
+  address: z.string(),
+  role: z.string(),
+  status: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
+  //online: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
+  //menu: z.string(),
+  //image: z.string(),
 });
-export type TAddDisheSchema = z.infer<typeof AddDisheSchema>;
+export type TAddUserSchema = z.infer<typeof AddUserSchema>;
 
 export default function CreateUser({ className }: IndexProps) {
   const {
@@ -47,36 +48,17 @@ export default function CreateUser({ className }: IndexProps) {
     getValues,
 
     formState: { errors, isSubmitting },
-  } = useForm<TAddDisheSchema>({
-    resolver: zodResolver(AddDisheSchema),
+  } = useForm<TAddUserSchema>({
+    resolver: zodResolver(AddUserSchema),
   });
 
-  const onSubmit = (data: TAddDisheSchema) => {
-    console.log("product_data", data);
-    toast.success(<Text as="b">Plat crée</Text>);
+  const onSubmit = (data: TAddUserSchema) => {
+    console.log(data);
+    toast.success(<Text as="b">Utilisateur crée</Text>);
     reset();
   };
 
   const [state, setState] = React.useState<any>("");
-  const [value, setValue] = useState(null);
-
-  const role_select = [
-    {
-      id: 1,
-      menu: "Admin",
-      value: "admin",
-    },
-    {
-      id: 2,
-      menu: "Customer",
-      value: "customer",
-    },
-  ];
-
-  const status_select = [
-    { id: 1, status: "Activé", value: "Activé" },
-    { id: 2, status: "Désactivé", value: "Désactivé" },
-  ];
 
   return (
     <div className="@container">
@@ -103,23 +85,69 @@ export default function CreateUser({ className }: IndexProps) {
               type="email"
               label="Email"
               placeholder="Entrez l'adresse email"
+              {...register("email")}
             />
             <Input
               type="tel"
               label="Téléphone"
               placeholder="Entrez le numéro de téléphone"
+              {...register("phone")}
             />
             <Password
               label="Mot de passe"
               placeholder="Entrez le mot de passe"
+              {...register("password")}
             />
-            <QuillEditor
-              // value={value}
-              onChange={() => register("description")}
+            <div className="col-span-2">
+              <div className="grid w-200px gap-3">
+                <Label htmlFor="message">Adresse</Label>
+                <Textarea
+                  placeholder="Description du plat"
+                  id="message"
+                  {...register("address")}
+                />
+              </div>
+            </div>
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <Label>Rôle</Label>
+              <select
+                id="role"
+                className={cn(
+                  "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+                  className
+                )}
+                {...register("role")}
+              >
+                <option value="Général">Sélectionnez un rôle</option>
+                <option value="admin">Admin</option>
+                <option value="client">Client</option>
+              </select>
+            </div>
+
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <Label>Status</Label>
+              <select
+                id="isActive"
+                className={cn(
+                  "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+                  className
+                )}
+                {...register("status")}
+              >
+                <option value="Général">Sélectionnez un status</option>
+                <option value={1}>Activé</option>
+                <option value={0}>Désactivé</option>
+              </select>
+            </div>
+            {/**
+             <QuillEditor
+              onChange={() => register("address")}
               label="Adresse"
               className="col-span-full [&_.ql-editor]:min-h-[100px]"
               labelClassName="font-medium text-gray-700 dark:text-gray-600 mb-1.5"
             />
+            
+
             <div>
               <label className="font-medium">Rôle</label>
               <Select>
@@ -127,24 +155,17 @@ export default function CreateUser({ className }: IndexProps) {
                   <SelectValue placeholder="Sélectionnez un rôle" />
                 </SelectTrigger>
                 <SelectContent className="bg-white ">
-                  {role_select.map(({ id, menu, value }) => (
-                    <SelectItem
-                      className="hover:bg-anzac-500 hover:text-white rounded-md"
-                      key={id}
-                      value={value}
-                    >
-                      {menu}
-                    </SelectItem>
-                  ))}
+                  <SelectItem
+                    className="hover:bg-anzac-500 hover:text-white rounded-md"
+                    key="id"
+                    value="value"
+                  >
+                    Admin
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            {/**             <Select
-              label="Sélectionnez un menu"
-              options={options}
-              value={value}
-              onChange={setValue}
-            />*/}
+
             <div>
               <label className="font-medium">Status</label>
               <Select>
@@ -164,7 +185,9 @@ export default function CreateUser({ className }: IndexProps) {
                 </SelectContent>
               </Select>
             </div>
+*/}
           </FormGroup>
+
           <FormGroup
             title="Image miniature"
             description="Télécharger l'image miniature de votre plat ici"
@@ -186,7 +209,7 @@ export default function CreateUser({ className }: IndexProps) {
           )}
         >
           <Button type="submit" className="w-full @xl:w-auto">
-            Créer le plat
+            Ajouter lutilisateur
           </Button>
         </div>
       </form>

@@ -1,6 +1,6 @@
 {
-  "id": "d5be048d-03f4-4902-9fdd-99dee4e34bb7",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "e26188c2-7c40-48bd-b7e6-a600e3a03f4f",
+  "prevId": "d5be048d-03f4-4902-9fdd-99dee4e34bb7",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -155,8 +155,8 @@
         }
       }
     },
-    "public.Order": {
-      "name": "Order",
+    "public.Orders": {
+      "name": "Orders",
       "schema": "",
       "columns": {
         "order_id": {
@@ -192,9 +192,9 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "Order_table_id_Tables_table_id_fk": {
-          "name": "Order_table_id_Tables_table_id_fk",
-          "tableFrom": "Order",
+        "Orders_table_id_Tables_table_id_fk": {
+          "name": "Orders_table_id_Tables_table_id_fk",
+          "tableFrom": "Orders",
           "tableTo": "Tables",
           "columnsFrom": [
             "table_id"
@@ -205,9 +205,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "Order_dishes_id_Dishes_dishe_id_fk": {
-          "name": "Order_dishes_id_Dishes_dishe_id_fk",
-          "tableFrom": "Order",
+        "Orders_dishes_id_Dishes_dishe_id_fk": {
+          "name": "Orders_dishes_id_Dishes_dishe_id_fk",
+          "tableFrom": "Orders",
           "tableTo": "Dishes",
           "columnsFrom": [
             "dishes_id"
@@ -221,8 +221,8 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "Order_order_id_unique": {
-          "name": "Order_order_id_unique",
+        "Orders_order_id_unique": {
+          "name": "Orders_order_id_unique",
           "nullsNotDistinct": false,
           "columns": [
             "order_id"
