@@ -21,8 +21,6 @@ export type TAddMenuSchema = z.infer<typeof AddMenuSchema>;
 
 // main category form component for create and update category
 export default function CreateMenu() {
-  const { data: session } = useSession();
-
   const {
     register,
     handleSubmit,
@@ -32,6 +30,7 @@ export default function CreateMenu() {
     resolver: zodResolver(AddMenuSchema),
   });
 
+  const { data: session } = useSession();
   const router = useRouter();
 
   async function onSubmit(data: TAddMenuSchema) {
