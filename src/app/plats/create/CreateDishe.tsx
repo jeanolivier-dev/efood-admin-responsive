@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,7 +59,7 @@ export default function CreateDishe({
   const onSubmit = (data: TAddDisheSchema) => {
     NewDishe({
       ...data,
-      dishe_id: session?.user.user_id,
+      dishe_id: session?.user.user_id ?? "",
     })
       .then(() => reset())
       .then(() => router.push("/plats"));

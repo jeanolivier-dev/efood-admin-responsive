@@ -36,7 +36,7 @@ export default function CreateMenu() {
   async function onSubmit(data: TAddMenuSchema) {
     NewMenu({
       ...data,
-      user_id: session?.user.user_id,
+      user_id: session?.user.user_id ?? "",
     })
       .then(() => reset())
       .then(() => router.push("/menu"));
