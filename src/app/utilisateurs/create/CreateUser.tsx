@@ -1,24 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input, Text, FileInput, Button, Password } from "rizzui";
+import { Input, FileInput, Button, Password } from "rizzui";
 import cn from "@/utils/class-names";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
-import QuillEditor from "@/components/ui/quill-editor";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Register } from "@/action/user";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useRouter } from "next/navigation";
 
 interface IndexProps {
@@ -34,12 +26,9 @@ const AddUserSchema = z.object({
   password: z
     .string()
     .min(8, { message: "Veuillez insérez 8 caractères minimun" }),
-  //confirmPassword: z.string(),
   address: z.string({ message: "Champ requis" }),
   role: z.enum(["client", "admin"]),
   status: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  //has_accepted: z.boolean(),
-
   //image: z.string(),
 });
 export type TAddUserSchema = z.infer<typeof AddUserSchema>;
@@ -61,7 +50,7 @@ export default function CreateUser({ className }: IndexProps) {
   const onSubmit = (data: TAddUserSchema) => {
     Register(data)
       .then(() => reset())
-    // console.log(data);
+      .then(() => router.push("/utilisateurs"));
   };
 
   const [state, setState] = React.useState<any>("");
@@ -145,53 +134,6 @@ export default function CreateUser({ className }: IndexProps) {
                 <option value={0}>Désactivé</option>
               </select>
             </div>
-            {/**
-             <QuillEditor
-              onChange={() => register("address")}
-              label="Adresse"
-              className="col-span-full [&_.ql-editor]:min-h-[100px]"
-              labelClassName="font-medium text-gray-700 dark:text-gray-600 mb-1.5"
-            />
-            
-
-            <div>
-              <label className="font-medium">Rôle</label>
-              <Select>
-                <SelectTrigger className="w-200px">
-                  <SelectValue placeholder="Sélectionnez un rôle" />
-                </SelectTrigger>
-                <SelectContent className="bg-white ">
-                  <SelectItem
-                    className="hover:bg-anzac-500 hover:text-white rounded-md"
-                    key="id"
-                    value="value"
-                  >
-                    Admin
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <label className="font-medium">Status</label>
-              <Select>
-                <SelectTrigger className="w-200px">
-                  <SelectValue placeholder="Sélectionnez un status" />
-                </SelectTrigger>
-                <SelectContent className="bg-white ">
-                  {status_select.map(({ id, status, value }) => (
-                    <SelectItem
-                      className="hover:bg-anzac-500 hover:text-white rounded-md"
-                      key={id}
-                      value={value}
-                    >
-                      {status}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-*/}
           </FormGroup>
 
           <FormGroup
@@ -214,7 +156,11 @@ export default function CreateUser({ className }: IndexProps) {
             "z-40 flex items-center justify-end gap-3 bg-gray-0/10  @lg:gap-4 @xl:grid @xl:auto-cols-max @xl:grid-flow-col"
           )}
         >
-          <Button type="submit" className="w-full @xl:w-auto">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full @xl:w-auto"
+          >
             Ajouter lutilisateur
           </Button>
         </div>
