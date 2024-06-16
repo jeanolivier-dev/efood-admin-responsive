@@ -11,7 +11,7 @@ import FormGroup from "@/components/form-group";
 import QuillEditor from "@/components/ui/quill-editor";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-
+import { Register } from "@/action/user";
 import {
   Select,
   SelectContent,
@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 interface IndexProps {
   slug?: string;
@@ -27,15 +28,18 @@ interface IndexProps {
 }
 
 const AddUserSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  phone: z.string(),
-  password: z.string(),
-  address: z.string(),
-  role: z.string(),
+  name: z.string({ message: "Champ requis" }),
+  email: z.string({ message: "Adresse email invalide" }),
+  phone: z.string({ message: "Champ requis" }),
+  password: z
+    .string()
+    .min(8, { message: "Veuillez insérez 8 caractères minimun" }),
+  //confirmPassword: z.string(),
+  address: z.string({ message: "Champ requis" }),
+  role: z.string({ message: "Sélectionnez un rôle" }),
   status: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  //online: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  //menu: z.string(),
+  //has_accepted: z.boolean(),
+
   //image: z.string(),
 });
 export type TAddUserSchema = z.infer<typeof AddUserSchema>;
@@ -52,10 +56,10 @@ export default function CreateUser({ className }: IndexProps) {
     resolver: zodResolver(AddUserSchema),
   });
 
+  const router = useRouter();
+
   const onSubmit = (data: TAddUserSchema) => {
     console.log(data);
-    toast.success(<Text as="b">Utilisateur crée</Text>);
-    reset();
   };
 
   const [state, setState] = React.useState<any>("");

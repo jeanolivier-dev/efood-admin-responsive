@@ -61,7 +61,6 @@ export default function CreateDishe({
       ...data,
       dishe_id: session?.user.user_id,
     })
-      .then(() => toast.success("Plat créé avec succès !"))
       .then(() => reset())
       .then(() => router.push("/plats"));
   };
