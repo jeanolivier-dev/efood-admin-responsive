@@ -3,10 +3,11 @@
 import { Users } from "@/database/schema";
 import { db } from "@/database/dbConnection";
 import { TSignupSchema } from "@/app/auth/signup/sign-up-form";
+import {TAddUserSchema} from "@/app/utilisateurs/create/CreateUser";
 import { hash } from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
-export async function Register(data: TSignupSchema) {
+export async function Register(data: TSignupSchema | TAddUserSchema) {
   try {
     await db.insert(Users).values({
       ...data,

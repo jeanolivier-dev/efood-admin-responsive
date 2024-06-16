@@ -36,7 +36,7 @@ const AddUserSchema = z.object({
     .min(8, { message: "Veuillez insérez 8 caractères minimun" }),
   //confirmPassword: z.string(),
   address: z.string({ message: "Champ requis" }),
-  role: z.string({ message: "Sélectionnez un rôle" }),
+  role: z.enum(["client", "admin"]),
   status: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
   //has_accepted: z.boolean(),
 
@@ -59,7 +59,9 @@ export default function CreateUser({ className }: IndexProps) {
   const router = useRouter();
 
   const onSubmit = (data: TAddUserSchema) => {
-    console.log(data);
+    Register(data)
+      .then(() => reset())
+    // console.log(data);
   };
 
   const [state, setState] = React.useState<any>("");
