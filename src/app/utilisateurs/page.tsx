@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Button } from "rizzui";
 import { PiPlusBold } from "react-icons/pi";
 import UsersList from "./UsersList";
+import { db } from "@/database/dbConnection";
+import { Users } from "@/database/schema";
 
 const pageHeader = {
   title: "Utilisateurs",
@@ -18,7 +20,9 @@ const pageHeader = {
   ],
 };
 
-export default function UsersPage() {
+export default async function UsersPage() {
+  const users = await db.select().from(Users);
+
   return (
     <HydrogenLayout>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
@@ -31,7 +35,7 @@ export default function UsersPage() {
           </Link>
         </div>
       </PageHeader>
-      <UsersList />
+      <UsersList users={users} />
     </HydrogenLayout>
   );
 }

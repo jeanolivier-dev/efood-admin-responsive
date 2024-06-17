@@ -1,33 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
-import toast from "react-hot-toast";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input, Text, FileInput, Button } from "rizzui";
+import { Input, FileInput, Button } from "rizzui";
 import cn from "@/utils/class-names";
 import { z } from "zod";
 import FormGroup from "@/components/form-group";
+import { NewTable } from "@/action/table";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface IndexProps {
   slug?: string;
   className?: string;
-  product?: TAddDisheSchema;
+  product?: TAddTableSchema;
 }
 
-const AddDisheSchema = z.object({
+const AddTableSchema = z.object({
   name: z.string(),
-  description: z.string(),
-  sku: z.string(),
-  price: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z.number().positive().min(1)
-  ),
-  online: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  menu: z.string(),
-  image: z.string(),
+  //image: z.string(),
 });
-export type TAddDisheSchema = z.infer<typeof AddDisheSchema>;
+export type TAddTableSchema = z.infer<typeof AddTableSchema>;
 
 export default function CreateTable({ className }: IndexProps) {
   const {
@@ -37,18 +31,23 @@ export default function CreateTable({ className }: IndexProps) {
     getValues,
 
     formState: { errors, isSubmitting },
-  } = useForm<TAddDisheSchema>({
-    resolver: zodResolver(AddDisheSchema),
+  } = useForm<TAddTableSchema>({
+    resolver: zodResolver(AddTableSchema),
   });
 
-  const onSubmit = (data: TAddDisheSchema) => {
-    console.log("product_data", data);
-    toast.success(<Text as="b">Plat crée</Text>);
-    reset();
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const onSubmit = (data: TAddTableSchema) => {
+    NewTable({
+      ...data,
+      user_id: session?.user.user_id ?? "",
+    })
+      .then(() => reset())
+      .then(() => router.push("/tables"));
   };
 
   const [state, setState] = React.useState<any>("");
-  const [value, setValue] = useState(null);
 
   return (
     <div className="@container">
@@ -93,7 +92,11 @@ export default function CreateTable({ className }: IndexProps) {
             "z-40 flex items-center justify-end gap-3 bg-gray-0/10  @lg:gap-4 @xl:grid @xl:auto-cols-max @xl:grid-flow-col"
           )}
         >
-          <Button type="submit" className="w-full @xl:w-auto">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full @xl:w-auto"
+          >
             Ajouter la table
           </Button>
         </div>
