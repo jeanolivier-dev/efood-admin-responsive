@@ -113,8 +113,8 @@ export default function CreateDishe({
                 {...register("menu_id")}
               >
                 <option value="Général">Sélectionnez un menu</option>
-                {menu.map(({ user_id, name }, i) => (
-                  <option key={i} value={user_id}>
+                {menu.map(({ name,menu_id }, i) => (
+                  <option key={i} value={menu_id}>
                     {name}
                   </option>
                 ))}

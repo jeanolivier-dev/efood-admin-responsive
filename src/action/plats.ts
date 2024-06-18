@@ -2,8 +2,8 @@
 
 import {Dishes} from "@/database/schema";
 import {db} from "@/database/dbConnection";
-import {TAddDisheSchema} from "@/app/plats/create/CreateDishe";
 import {v4 as uuidv4} from "uuid";
+import {revalidatePath} from "next/cache";
 
 type DataType =
   {
@@ -14,10 +14,10 @@ type DataType =
     price: number
   }
 
-export async function NewDishe(data:DataType) {
-  // console.log(data)
+export async function NewDishe(data: DataType) {
   try {
-    await db.insert(Dishes).values({ ...data, dishe_id: uuidv4() });
+    await db.insert(Dishes).values({...data, dishe_id: uuidv4()});
+    revalidatePath("/plats")
     return JSON.stringify("Plat créé");
   } catch (error: any) {
     return JSON.stringify(error);
