@@ -20,6 +20,7 @@ interface IndexProps {
 const AddTableSchema = z.object({
   name: z.string(),
   //image: z.string(),
+  user_id: z.string(),
 });
 export type TAddTableSchema = z.infer<typeof AddTableSchema>;
 
@@ -41,7 +42,7 @@ export default function CreateTable({ className }: IndexProps) {
   const onSubmit = (data: TAddTableSchema) => {
     NewTable({
       ...data,
-      user_id: session?.user.user_id ?? "",
+      user_id: session?.user ?? ("" as string),
     })
       .then(() => reset())
       .then(() => router.push("/tables"));

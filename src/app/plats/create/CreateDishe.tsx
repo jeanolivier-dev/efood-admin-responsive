@@ -11,10 +11,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MenuType } from "@/database/schema";
-import { useSession } from "next-auth/react";
 import { NewDishe } from "@/action/plats";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 interface IndexProps {
   slug?: string;
@@ -51,11 +49,10 @@ export default function CreateDishe({
     resolver: zodResolver(AddDisheSchema),
   });
 
-  const { data: session } = useSession();
   const router = useRouter();
 
   const onSubmit = async (data: TAddDisheSchema) => {
-    NewDishe({...data, is_active: data.is_active === 1})
+    NewDishe({ ...data, is_active: data.is_active === 1 })
       .then(() => reset())
       .then(() => router.push("/plats"));
   };
@@ -113,7 +110,7 @@ export default function CreateDishe({
                 {...register("menu_id")}
               >
                 <option value="Général">Sélectionnez un menu</option>
-                {menu.map(({ name,menu_id }, i) => (
+                {menu.map(({ name, menu_id }, i) => (
                   <option key={i} value={menu_id}>
                     {name}
                   </option>
