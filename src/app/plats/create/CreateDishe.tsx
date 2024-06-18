@@ -29,8 +29,8 @@ const AddDisheSchema = z.object({
     (a) => parseInt(z.string().parse(a), 10),
     z.number().positive().min(1)
   ),
-  status: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
-  menu: z.string(),
+  is_active: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number()),
+  menu_id: z.string(),
   //image: z.string(),
 });
 export type TAddDisheSchema = z.infer<typeof AddDisheSchema>;
@@ -46,8 +46,6 @@ export default function CreateDishe({
     register,
     handleSubmit,
     reset,
-    getValues,
-
     formState: { errors, isSubmitting },
   } = useForm<TAddDisheSchema>({
     resolver: zodResolver(AddDisheSchema),
@@ -56,11 +54,8 @@ export default function CreateDishe({
   const { data: session } = useSession();
   const router = useRouter();
 
-  const onSubmit = (data: TAddDisheSchema) => {
-    NewDishe({
-      ...data,
-      menu_id: session?.user.user_id ?? "",
-    })
+  const onSubmit = async (data: TAddDisheSchema) => {
+    NewDishe({...data, is_active: data.is_active === 1})
       .then(() => reset())
       .then(() => router.push("/plats"));
   };
@@ -100,7 +95,7 @@ export default function CreateDishe({
                   "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
                   className
                 )}
-                {...register("status")}
+                {...register("is_active")}
               >
                 <option value="Général">Sélectionnez un status</option>
                 <option value={1}>Activé</option>
@@ -115,7 +110,7 @@ export default function CreateDishe({
                   "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
                   className
                 )}
-                {...register("menu")}
+                {...register("menu_id")}
               >
                 <option value="Général">Sélectionnez un menu</option>
                 {menu.map(({ user_id, name }, i) => (
