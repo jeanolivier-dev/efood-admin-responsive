@@ -57,7 +57,7 @@ export const Tables = pgTable("Tables", {
   qr_code: varchar("qr_code"),
   user_id: uuid("user_id")
     .notNull()
-    .references(() => Dishes.dishe_id),
+    .references(() => Users.user_id),
   created_at: timestamp("created_at").defaultNow(),
 });
 

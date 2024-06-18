@@ -15,6 +15,13 @@
       "when": 1718457689869,
       "tag": "0001_awesome_hemingway",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1718708848873,
+      "tag": "0002_panoramic_sebastian_shaw",
+      "breakpoints": true
     }
   ]
 }

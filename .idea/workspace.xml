@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="782d766c-1168-40b4-a393-4a5ebc628bea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/action/plats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/action/plats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/plats/create/CreateDishe.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/plats/create/CreateDishe.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drizzle/meta/_journal.json" beforeDir="false" afterPath="$PROJECT_DIR$/drizzle/meta/_journal.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/action/table.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/action/table.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tables/create/CreateTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tables/create/CreateTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/schema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +85,8 @@
       <workItem from="1718565620477" duration="34000" />
       <workItem from="1718565791309" duration="837000" />
       <workItem from="1718669521172" duration="1803000" />
-      <workItem from="1718701969751" duration="1088000" />
+      <workItem from="1718701969751" duration="1337000" />
+      <workItem from="1718708311440" duration="587000" />
     </task>
     <servers />
   </component>
