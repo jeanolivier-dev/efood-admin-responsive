@@ -23,22 +23,9 @@ import qrImage from "@/app/assets/efood-qrtest.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MoreHorizontal } from "lucide-react";
+import { TablesType } from "@/database/schema";
 
-export default function TablesList() {
-  const date = new Date();
-  const order = [
-    {
-      id: 1,
-      name: "Table 1",
-      created_at: date.toDateString(),
-    },
-    {
-      id: 2,
-      name: "Table 2",
-      created_at: date.toDateString(),
-    },
-  ];
-
+export default function TablesList({ tables }: { tables: TablesType[] }) {
   return (
     <Card>
       <CardContent>
@@ -52,8 +39,8 @@ export default function TablesList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {order.map(({ id, name, created_at }) => (
-              <TableRow key={id} className="bg-accent">
+            {tables.map(({ table_id, name, created_at }) => (
+              <TableRow key={table_id} className="bg-accent">
                 <TableCell>
                   <div className="font-medium">{name}</div>
                 </TableCell>
@@ -69,7 +56,7 @@ export default function TablesList() {
                   </Badge>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {created_at}
+                  {created_at && created_at.getUTCDate()}
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>

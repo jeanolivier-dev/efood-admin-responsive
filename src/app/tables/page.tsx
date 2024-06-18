@@ -4,6 +4,8 @@ import { PiPlusBold } from "react-icons/pi";
 import { Button } from "rizzui";
 import PageHeader from "@/components/page-header";
 import TablesList from "./TablesList";
+import { db } from "@/database/dbConnection";
+import { Tables } from "@/database/schema";
 
 const pageHeader = {
   title: "Tables",
@@ -18,7 +20,8 @@ const pageHeader = {
   ],
 };
 
-export default function TablePage() {
+export default async function TablePage() {
+  const tables = await db.select().from(Tables);
   return (
     <HydrogenLayout>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
@@ -31,7 +34,7 @@ export default function TablePage() {
           </Link>
         </div>
       </PageHeader>
-      <TablesList />
+      <TablesList tables={tables} />
     </HydrogenLayout>
   );
 }
