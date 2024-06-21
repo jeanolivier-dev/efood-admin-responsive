@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import productImage from "@/app/assets/noproduct.jpg";
 import { MoreHorizontal } from "lucide-react";
@@ -22,8 +24,12 @@ import {
 } from "@/components/ui/table";
 import Link from "next/link";
 import { DisheType } from "@/database/schema";
+import { DeletedDishe } from "@/action/plats";
 
 export default function DishesList({ dishes }: { dishes: DisheType[] }) {
+  async function handleDelete(dishe_id: string) {
+    await DeletedDishe(dishe_id);
+  }
   return (
     <Card>
       <CardContent>
@@ -95,11 +101,11 @@ export default function DishesList({ dishes }: { dishes: DisheType[] }) {
                             Modifier
                           </DropdownMenuItem>
                         </Link>
-                        <Link href="#">
+                        <button onClick={() => handleDelete(dishe_id)}>
                           <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
                             Supprimer
                           </DropdownMenuItem>
-                        </Link>
+                        </button>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

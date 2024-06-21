@@ -22,8 +22,13 @@ import {
 } from "@/components/ui/table";
 import Link from "next/link";
 import { MenuType } from "@/database/schema";
+import { DeletedMenu } from "@/action/menu";
 
 export default function MenuList({ menu }: { menu: MenuType[] }) {
+  async function handleDelete(user_id: string) {
+    await DeletedMenu(user_id);
+  }
+
   return (
     <Card>
       <CardContent>
@@ -43,8 +48,8 @@ export default function MenuList({ menu }: { menu: MenuType[] }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {menu.map(({ user_id, name, description, created_at }) => (
-              <TableRow key={user_id}>
+            {menu.map(({ menu_id, name, description, created_at }) => (
+              <TableRow key={menu_id}>
                 <TableCell className="hidden sm:table-cell">
                   <Image
                     alt="Product image"
@@ -77,11 +82,11 @@ export default function MenuList({ menu }: { menu: MenuType[] }) {
                           Modifier
                         </DropdownMenuItem>
                       </Link>
-                      <Link href="#">
+                      <button onClick={() => handleDelete(menu_id)}>
                         <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
                           Supprimer
                         </DropdownMenuItem>
-                      </Link>
+                      </button>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

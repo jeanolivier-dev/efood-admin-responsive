@@ -1,17 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import productImage from "@/app/assets/noproduct.jpg";
 import { MoreHorizontal } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,28 +23,12 @@ import {
 } from "@/components/ui/table";
 import Link from "next/link";
 import { UserType } from "@/database/schema";
-
-const date = new Date();
-const user = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@gmail.com",
-    role: "Admin",
-    status: "Activé",
-    created_at: date.toDateString(),
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-    email: "jane.doe@gmail.com",
-    role: "customer",
-    status: "Désactivé",
-    created_at: date.toDateString(),
-  },
-];
+import { DeletedUser } from "@/action/user";
 
 export default function UsersList({ users }: { users: UserType[] }) {
+  async function handleDelete(user_id: string) {
+    await DeletedUser(user_id);
+  }
   return (
     <Card>
       <CardContent>
@@ -113,11 +91,11 @@ export default function UsersList({ users }: { users: UserType[] }) {
                             Modifier
                           </DropdownMenuItem>
                         </Link>
-                        <Link href="#">
+                        <button onClick={() => handleDelete(user_id)}>
                           <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
                             Supprimer
                           </DropdownMenuItem>
-                        </Link>
+                        </button>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
