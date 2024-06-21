@@ -45,7 +45,7 @@ export default function DishesList({ dishes }: { dishes: DisheType[] }) {
               </TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Prix</TableHead>
-              <TableHead className="hidden md:table-cell">Créé le</TableHead>
+              <TableHead>Créé le</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -79,9 +79,7 @@ export default function DishesList({ dishes }: { dishes: DisheType[] }) {
                     <Badge variant="outline">{is_active}</Badge>
                   </TableCell>
                   <TableCell>{price} CFA</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {created_at && created_at.getUTCDate()}
-                  </TableCell>
+                  <TableCell>{created_at && created_at.getUTCDate()}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
