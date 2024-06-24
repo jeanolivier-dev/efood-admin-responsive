@@ -77,9 +77,10 @@ export default function TablesList({ tables }: { tables: TablesType[] }) {
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <Link href="#">
                         <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
-                          Modifier
+                          Voir
                         </DropdownMenuItem>
                       </Link>
+
                       <button onClick={() => handleDelete(table_id)}>
                         <DropdownMenuItem className="hover:bg-anzac-500 hover:text-white rounded-md">
                           Supprimer
