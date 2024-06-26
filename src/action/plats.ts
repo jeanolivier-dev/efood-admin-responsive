@@ -5,6 +5,7 @@ import { db } from "@/database/dbConnection";
 import { v4 as uuidv4 } from "uuid";
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
+import { Plate } from "@/app/plats/DishesList";
 
 type DataType = {
   name: string;
@@ -29,6 +30,14 @@ export async function DeletedDishe(dishe_id: string) {
     await db.delete(Dishes).where(eq(Dishes.dishe_id, dishe_id));
     revalidatePath("/plats");
     return JSON.stringify("Le plat a été supprimé");
+  } catch (error) {
+    return JSON.stringify(error);
+  }
+}
+
+export async function UpdateDishe() {
+  try {
+    await db.update(Dishes).set().where();
   } catch (error) {
     return JSON.stringify(error);
   }

@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import productImage from "@/app/assets/noproduct.jpg";
-import {SquarePen, Trash2} from "lucide-react";
-import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardFooter} from "@/components/ui/card";
+import { SquarePen, Trash2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -23,7 +23,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
+} from "@/components/ui/drawer";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,23 +34,27 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import {DisheType} from "@/database/schema";
-import {DeletedDishe} from "@/action/plats";
-import {useState} from "react";
+} from "@/components/ui/alert-dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { DisheType } from "@/database/schema";
+import { DeletedDishe } from "@/action/plats";
+import { useState } from "react";
 
-type Plate = {
+export type Plate = {
   name: string;
   description: string;
   price: number;
   is_active: boolean | null;
-}
+};
 
-export default function DishesList({dishes}: { dishes: DisheType[] }) {
+export default function DishesList({ dishes }: { dishes: DisheType[] }) {
   const [formData, setFormData] = useState<Plate>({
     description: "",
     is_active: false,
-    price: 0, name: ""
+    price: 0,
+    name: "",
   });
 
   async function handleDelete(dishe_id: string) {
@@ -81,13 +85,13 @@ export default function DishesList({dishes}: { dishes: DisheType[] }) {
           <TableBody>
             {dishes.map(
               ({
-                 dishe_id,
-                 name,
-                 description,
-                 is_active,
-                 price,
-                 created_at,
-               }) => (
+                dishe_id,
+                name,
+                description,
+                is_active,
+                price,
+                created_at,
+              }) => (
                 <TableRow key={dishe_id}>
                   <TableCell className="hidden sm:table-cell">
                     <Image
@@ -111,38 +115,65 @@ export default function DishesList({dishes}: { dishes: DisheType[] }) {
                     <div className={"flex gap-4"}>
                       {/*Edit*/}
                       <Drawer>
-                        <DrawerTrigger onClick={() => setFormData({
-                          name,
-                          description,
-                          is_active,
-                          price
-                        })}><SquarePen
-                          className={"cursor-pointer"}/></DrawerTrigger>
+                        <DrawerTrigger
+                          onClick={() =>
+                            setFormData({
+                              name,
+                              description,
+                              is_active,
+                              price,
+                            })
+                          }
+                        >
+                          <SquarePen className={"cursor-pointer"} />
+                        </DrawerTrigger>
                         <DrawerContent>
                           <DrawerHeader>
                             <DrawerTitle>Modification de {name}</DrawerTitle>
-                            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                            <DrawerDescription>
+                              This action cannot be undone.
+                            </DrawerDescription>
                           </DrawerHeader>
-                          <div>
+                          <div className="grid w-full max-w-sm items-center gap-4 pl-4">
                             {/*name*/}
-                            <input type={"text"} value={formData?.name}
-                                   onChange={(e) => setFormData({
-                                     description: formData.description,
-                                     is_active: formData.is_active,
-                                     price: formData.price, name: e.target.value
-                                   })}/>
+                            <div>
+                              <Label>Nom</Label>
+                              <Input
+                                type={"text"}
+                                value={formData?.name}
+                                onChange={(e) =>
+                                  setFormData({
+                                    description: formData.description,
+                                    is_active: formData.is_active,
+                                    price: formData.price,
+                                    name: e.target.value,
+                                  })
+                                }
+                              />
+                            </div>
+
                             {/*description*/}
-                            <input type={"text"} value={formData?.description}
-                                   onChange={(e) => setFormData({
-                                     description: e.target.value,
-                                     is_active: formData.is_active,
-                                     price: formData.price, name: formData.name
-                                   })}/>
+                            <div>
+                              <Label>Description</Label>
+                              <Textarea
+                                value={formData?.description}
+                                onChange={(e) =>
+                                  setFormData({
+                                    description: e.target.value,
+                                    is_active: formData.is_active,
+                                    price: formData.price,
+                                    name: formData.name,
+                                  })
+                                }
+                              />
+                            </div>
                           </div>
                           <DrawerFooter>
-                            <Button onClick={() => console.log(formData)}>Submit</Button>
+                            <Button onClick={() => console.log(formData)}>
+                              Modifier
+                            </Button>
                             <DrawerClose>
-                              <Button variant="outline">Cancel</Button>
+                              <Button variant="outline">Annuler</Button>
                             </DrawerClose>
                           </DrawerFooter>
                         </DrawerContent>
@@ -151,18 +182,27 @@ export default function DishesList({dishes}: { dishes: DisheType[] }) {
 
                       {/*delete*/}
                       <AlertDialog>
-                        <AlertDialogTrigger><Trash2 color={"red"} className={"cursor-pointer"}/></AlertDialogTrigger>
+                        <AlertDialogTrigger>
+                          <Trash2 color={"red"} className={"cursor-pointer"} />
+                        </AlertDialogTrigger>
                         <AlertDialogContent>
-                          <AlertDialogHeader>es vous sur de vouloir supprimer ?
-                            <AlertDialogTitle>Et</AlertDialogTitle>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Êtes vous sur de vouloir supprimer ?
+                            </AlertDialogTitle>
                             <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete your account
-                              and remove your data from our servers.
+                              Cette action ne peut pas être annulée. Cela
+                              supprimera définitivement les informations dans
+                              notre base de données.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDelete(dishe_id)}>Continue</AlertDialogAction>
+                            <AlertDialogCancel>Annuler</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleDelete(dishe_id)}
+                            >
+                              Supprimer
+                            </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
