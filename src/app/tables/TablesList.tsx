@@ -12,14 +12,6 @@ import {
 } from "@/components/ui/table";
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -45,12 +37,9 @@ import Image from "next/image";
 import qrImage from "@/app/assets/efood-qrtest.png";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { MoreHorizontal } from "lucide-react";
 import { SquarePen, Trash2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { TablesType } from "@/database/schema";
 import { DeletedTable } from "@/action/table";
 import { useState } from "react";
