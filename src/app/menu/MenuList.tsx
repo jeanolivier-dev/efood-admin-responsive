@@ -92,7 +92,7 @@ export default function MenuList({ menu }: { menu: MenuType[] }) {
                 </TableCell>
                 <TableCell className="font-medium">4</TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {created_at && created_at.getUTCDate()}
+                  {created_at && created_at.toLocaleDateString()}
                 </TableCell>
                 <TableCell>
                   <div className={"flex gap-4"}>

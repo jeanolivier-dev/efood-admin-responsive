@@ -87,7 +87,7 @@ export default function TablesList({ tables }: { tables: TablesType[] }) {
                   </Badge>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {created_at && created_at.getUTCDate()}
+                  {created_at && created_at.toLocaleDateString()}
                 </TableCell>
                 <TableCell>
                   <div className={"flex gap-4"}>

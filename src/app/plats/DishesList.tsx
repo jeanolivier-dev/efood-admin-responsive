@@ -110,7 +110,9 @@ export default function DishesList({ dishes }: { dishes: DisheType[] }) {
                     <Badge variant="outline">{is_active}</Badge>
                   </TableCell>
                   <TableCell>{price} CFA</TableCell>
-                  <TableCell>{created_at && created_at.getUTCDate()}</TableCell>
+                  <TableCell>
+                    {created_at && created_at.toLocaleDateString()}
+                  </TableCell>
                   <TableCell>
                     <div className={"flex gap-4"}>
                       {/*Edit*/}

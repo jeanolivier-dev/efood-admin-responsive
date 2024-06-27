@@ -70,7 +70,7 @@ export default function UsersList({ users }: { users: UserType[] }) {
                     <Badge variant="outline">{is_active}</Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {createdAt && createdAt.getDate()}
+                    {createdAt && createdAt.toLocaleDateString()}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
