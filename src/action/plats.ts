@@ -34,11 +34,3 @@ export async function DeletedDishe(dishe_id: string) {
     return JSON.stringify(error);
   }
 }
-
-export async function UpdateDishe() {
-  try {
-    await db.update(Dishes).set().where();
-  } catch (error) {
-    return JSON.stringify(error);
-  }
-}
