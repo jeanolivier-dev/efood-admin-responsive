@@ -7,9 +7,7 @@ export default function SignUpPage() {
     <AuthWrapper
       title={
         <>
-          <span className="text-anzac-400 bg-clip-text text-transparent">
-            Bienvenue
-          </span>
+          <span className="text-anzac-400 bg-clip-text">Bienvenue</span>
           <br />
           Inscrivez vous pour profiter de notre menu digital
         </>
