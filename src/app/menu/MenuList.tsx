@@ -68,7 +68,7 @@ export default function MenuList({ menu }: { menu: MenuType[] }) {
               <TableHead>Nom</TableHead>
               <TableHead className="sr-only">Description</TableHead>
               <TableHead>Nombre de plats</TableHead>
-              <TableHead className="hidden md:table-cell">Créé le</TableHead>
+              <TableHead>Créé le</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -91,7 +91,7 @@ export default function MenuList({ menu }: { menu: MenuType[] }) {
                   {description}
                 </TableCell>
                 <TableCell className="font-medium">4</TableCell>
-                <TableCell className="hidden md:table-cell">
+                <TableCell>
                   {created_at && created_at.toLocaleDateString()}
                 </TableCell>
                 <TableCell>
