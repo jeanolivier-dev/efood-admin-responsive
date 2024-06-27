@@ -131,7 +131,7 @@ export default function DishesList({ dishes }: { dishes: DisheType[] }) {
                           <DrawerHeader>
                             <DrawerTitle>Modification de {name}</DrawerTitle>
                             <DrawerDescription>
-                              This action cannot be undone.
+                              Cette action ne peut pas être annulée.
                             </DrawerDescription>
                           </DrawerHeader>
                           <div className="grid w-full max-w-sm items-center gap-4 pl-4">
